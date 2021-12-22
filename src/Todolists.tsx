@@ -1,6 +1,6 @@
 import React from 'react';
 
-type TasksType={
+export type TasksType={
     id:number
     title:string
     isDone:boolean
@@ -9,9 +9,13 @@ type TasksType={
 type TodolistsType={
     title:string
     tasks:Array<TasksType>
+    removeTask:(taskId:number)=>void
 }
 
-export const Todolists = ({title,tasks,...props}:TodolistsType) => {
+export const Todolists = ({title,tasks, removeTask,...props}:TodolistsType) => {
+
+
+
     return (
             <div>
                 <h3>{title}</h3>
@@ -20,9 +24,19 @@ export const Todolists = ({title,tasks,...props}:TodolistsType) => {
                     <button>+</button>
                 </div>
                 <ul>
-                    <li><input type={'checkbox'} checked={tasks[0].isDone}/> <span>{tasks[0].title}</span></li>
-                    <li><input type={'checkbox'} checked={tasks[1].isDone}/> <span>{tasks[1].title}</span></li>
-                    <li><input type={'checkbox'} checked={tasks[2].isDone}/> <span>{tasks[2].title}</span></li>
+                    {
+                        tasks.map(t=>{
+
+                            const removeTaskHandler = () => removeTask(t.id)
+
+                            return (
+                            <li key={t.id}>
+                                <input type={'checkbox'} checked={t.isDone}/>
+                                <span>{t.title}</span>
+                                <button onClick={removeTaskHandler}>X</button>
+                            </li>)
+                    })
+                    }
                 </ul>
                 <div>
                     <button>All</button>
