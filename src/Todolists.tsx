@@ -1,5 +1,6 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
 import {FilterType} from './App';
+import InputForAdd from './components/InputForAdd';
 
 export type TasksType = {
     id: string
@@ -18,6 +19,7 @@ type TodolistType = {
     addTask: (todolistId: string, newTitle: string) => void
     changeStatus: (todolistId: string, taskId: string, newIsDone: boolean) => void
     removeTodolist: (todolistId: string) => void
+    addTodolist: (newTitle: string) => void
 }
 
 export const Todolists = ({
@@ -30,40 +32,18 @@ export const Todolists = ({
                               addTask,
                               changeStatus,
                               removeTodolist,
+                              addTodolist,
                               ...props
                           }: TodolistType) => {
 
-    const [title, setTitle] = useState('')
-    const [error, setError] = useState<string | null>(null)
-
-    const addTaskHandler = () => {
-        if (title.trim() !== '') {
-            addTask(todolistId, title)
-            setTitle('')
-        } else {
-            setError('Incorrect title')
-        }
-    }
-    const onChangeTitleHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        setError('')
-        setTitle(e.currentTarget.value)
-    }
-    const addTaskOnKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-        if (title.trim() !== '') {
-            if (e.charCode === 13) {
-                addTask(todolistId, title)
-                setTitle('')
-            }
-        } else {
-            setError('Incorrect title')
-        }
-    }
 
     const filterAll = () => changeFilter(todolistId, 'all')
     const filterActive = () => changeFilter(todolistId, 'active')
     const filterCompleted = () => changeFilter(todolistId, 'completed')
     const removeTodolistHandler = () => removeTodolist(todolistId)
-
+    const functionForAddTask = (title: string) => {
+        addTask(todolistId, title)
+    }
 
     return (
         <div>
@@ -71,12 +51,7 @@ export const Todolists = ({
                 {todolistTitle}
                 <button onClick={removeTodolistHandler}>X</button>
             </h3>
-            <div>
-                <input className={error ? 'error' : ''} value={title} onChange={onChangeTitleHandler}
-                       onKeyPress={addTaskOnKeyPressHandler}/>
-                <button onClick={addTaskHandler}>+</button>
-                {error && <div className={'errorMessage'}>{error}</div>}
-            </div>
+            <InputForAdd item={functionForAddTask}/>
             <ul>
                 {
                     tasks.map(t => {
