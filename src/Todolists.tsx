@@ -7,17 +7,21 @@ export type TasksType = {
     isDone: boolean
 }
 
-type TodolistsType = {
+type TodolistType = {
+    key: string
+    todolistId: string
     todolistTitle: string
     tasks: Array<TasksType>
     filter: FilterType
-    removeTask: (taskId: string) => void
-    changeFilter: (filter: FilterType) => void
-    addTask: (newTitle: string) => void
-    changeStatus: (taskId: string, newIsDone: boolean) => void
+    removeTask: (todolistId: string, taskId: string) => void
+    changeFilter: (todolistId: string, value: FilterType) => void
+    addTask: (todolistId: string, newTitle: string) => void
+    changeStatus: (todolistId: string, taskId: string, newIsDone: boolean) => void
+    removeTodolist: (todolistId: string) => void
 }
 
 export const Todolists = ({
+                              todolistId,
                               todolistTitle,
                               tasks,
                               filter,
@@ -25,15 +29,16 @@ export const Todolists = ({
                               changeFilter,
                               addTask,
                               changeStatus,
+                              removeTodolist,
                               ...props
-                          }: TodolistsType) => {
+                          }: TodolistType) => {
 
     const [title, setTitle] = useState('')
     const [error, setError] = useState<string | null>(null)
 
     const addTaskHandler = () => {
         if (title.trim() !== '') {
-            addTask(title)
+            addTask(todolistId, title)
             setTitle('')
         } else {
             setError('Incorrect title')
@@ -46,7 +51,7 @@ export const Todolists = ({
     const addTaskOnKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
         if (title.trim() !== '') {
             if (e.charCode === 13) {
-                addTask(title)
+                addTask(todolistId, title)
                 setTitle('')
             }
         } else {
@@ -54,14 +59,18 @@ export const Todolists = ({
         }
     }
 
-    const filterAll = () => changeFilter('all')
-    const filterActive = () => changeFilter('active')
-    const filterCompleted = () => changeFilter('completed')
+    const filterAll = () => changeFilter(todolistId, 'all')
+    const filterActive = () => changeFilter(todolistId, 'active')
+    const filterCompleted = () => changeFilter(todolistId, 'completed')
+    const removeTodolistHandler = () => removeTodolist(todolistId)
 
 
     return (
         <div>
-            <h3>{todolistTitle}</h3>
+            <h3>
+                {todolistTitle}
+                <button onClick={removeTodolistHandler}>X</button>
+            </h3>
             <div>
                 <input className={error ? 'error' : ''} value={title} onChange={onChangeTitleHandler}
                        onKeyPress={addTaskOnKeyPressHandler}/>
@@ -72,9 +81,9 @@ export const Todolists = ({
                 {
                     tasks.map(t => {
 
-                        const removeTaskHandler = () => removeTask(t.id)
+                        const removeTaskHandler = () => removeTask(todolistId, t.id)
                         const changeStatusTasksHandler = (e: ChangeEvent<HTMLInputElement>) => {
-                            changeStatus(t.id, e.currentTarget.checked)
+                            changeStatus(todolistId, t.id, e.currentTarget.checked)
                         }
                         return (
                             <li key={t.id} className={t.isDone ? 'is-done' : ''}>
