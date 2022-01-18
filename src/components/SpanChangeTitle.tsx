@@ -1,28 +1,28 @@
 import React, {ChangeEvent, useState} from 'react';
 
-type SpanChangeTitleType={
-    title:string
-    onChange:(newTitle:string)=>void
+type SpanChangeTitleType = {
+    title: string
+    onChange: (newTitle: string) => void
 }
 
-const SpanChangeTitle = ({title,onChange,...props}:SpanChangeTitleType) => {
+const SpanChangeTitle = ({title, onChange, ...props}: SpanChangeTitleType) => {
 
-    const [editMode, setEditMode]=useState<boolean>(true)
-    const [newtitle, setNewTitle]=useState(title)
+    const [editMode, setEditMode] = useState<boolean>(true)
+    const [newtitle, setNewTitle] = useState(title)
 
-    const onChangeHandler=(e:ChangeEvent<HTMLInputElement>)=>{
+    const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setNewTitle(e.currentTarget.value)
     }
 
     const addNewTitle = () => {
-      onChange(newtitle)
+        onChange(newtitle)
         setEditMode(!editMode)
     }
 
     return (
         editMode
-            ?<span onDoubleClick={()=>setEditMode(!editMode)}>{newtitle}</span>
-            :<input value={newtitle} onChange={onChangeHandler} onBlur={addNewTitle}/>
+            ? <span onDoubleClick={() => setEditMode(!editMode)}>{newtitle}</span>
+            : <input value={newtitle} onChange={onChangeHandler} onBlur={addNewTitle} autoFocus/>
 
     );
 };

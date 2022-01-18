@@ -22,7 +22,7 @@ type TodolistType = {
     removeTodolist: (todolistId: string) => void
     addTodolist: (newTitle: string) => void
     changeTodolistTitle: (todolistId: string, newTitle: string) => void
-    changeTaskTitle:(todolistId: string, taskId: string, newTitle:string)=>void
+    changeTaskTitle: (todolistId: string, taskId: string, newTitle: string) => void
 }
 
 export const Todolists = ({
@@ -49,8 +49,8 @@ export const Todolists = ({
     const functionForAddTask = (title: string) => {
         addTask(todolistId, title)
     }
-    const functionForChangeTodolisttitle = (newTitle:string) => {
-      changeTodolistTitle(todolistId, newTitle)
+    const functionForChangeTodolisttitle = (newTitle: string) => {
+        changeTodolistTitle(todolistId, newTitle)
     }
 
 
@@ -69,8 +69,8 @@ export const Todolists = ({
                         const changeStatusTasksHandler = (e: ChangeEvent<HTMLInputElement>) => {
                             changeStatus(todolistId, t.id, e.currentTarget.checked)
                         }
-                        const functionForChangeTaskTitle = (newTitle:string) => {
-                            changeTaskTitle(todolistId, t.id, newTitle )
+                        const functionForChangeTaskTitle = (newTitle: string) => {
+                            changeTaskTitle(todolistId, t.id, newTitle)
                         }
                         return (
                             <li key={t.id} className={t.isDone ? 'is-done' : ''}>

@@ -38,6 +38,8 @@ function App() {
         ]
     })
 
+    // Tasks function
+
     const removeTask = (todolistId: string, taskId: string) => {
         setTasks({...tasks, [todolistId]: tasks[todolistId].filter(t => t.id !== taskId)})
     }
@@ -48,23 +50,27 @@ function App() {
     const changeStatus = (todolistId: string, taskId: string, newIsDone: boolean) => {
         setTasks({...tasks, [todolistId]: tasks[todolistId].map(t => t.id === taskId ? {...t, isDone: newIsDone} : t)})
     }
+    const changeTaskTitle = (todolistId: string, taskId: string, newTitle: string) => {
+        setTasks({...tasks, [todolistId]: tasks[todolistId].map(t => t.id === taskId ? {...t, title: newTitle} : t)})
+    }
+
+    // Todolists function
+
     const changeFilter = (todolistId: string, value: FilterType) => {
         setTodolists(todolists.map(tl => tl.id === todolistId ? {...tl, filter: value} : tl))
     }
     const removeTodolist = (todolistId: string) => {
         setTodolists(todolists.filter(tl => tl.id !== todolistId))
     }
-    const addTodolist = (newTitle:string) => {
-        let newTodolist:TodolistsTaskType={id:v1(), todolistTitle:newTitle, filter:'all'}
-      setTodolists([newTodolist, ...todolists])
-        setTasks({...tasks, [newTodolist.id]:[]})
+    const addTodolist = (newTitle: string) => {
+        let newTodolist: TodolistsTaskType = {id: v1(), todolistTitle: newTitle, filter: 'all'}
+        setTodolists([newTodolist, ...todolists])
+        setTasks({...tasks, [newTodolist.id]: []})
     }
-    const changeTodolistTitle = (todolistId:string, newTitle:string) => {
-      setTodolists(todolists.map(tl=>tl.id===todolistId?{...tl, todolistTitle:newTitle}:tl))
+    const changeTodolistTitle = (todolistId: string, newTitle: string) => {
+        setTodolists(todolists.map(tl => tl.id === todolistId ? {...tl, todolistTitle: newTitle} : tl))
     }
-    const changeTaskTitle = (todolistId:string, taskId:string, newTitle:string) => {
-      setTasks({...tasks, [todolistId]:tasks[todolistId].map(t=>t.id===taskId?{...t, title:newTitle}:t)})
-    }
+
 
 
     return (
@@ -104,3 +110,6 @@ function App() {
 }
 
 export default App;
+
+export class TodolistType {
+}

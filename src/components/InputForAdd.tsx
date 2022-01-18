@@ -1,10 +1,10 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
 
-type InputForAddType={
-    item:(newTitle:string)=>void
+type InputForAddType = {
+    item: (newTitle: string) => void
 }
 
-const InputForAdd = ({item,...props}:InputForAddType) => {
+const InputForAdd = ({item, ...props}: InputForAddType) => {
 
     const [title, setTitle] = useState('')
     const [error, setError] = useState<string | null>(null)
