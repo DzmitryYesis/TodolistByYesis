@@ -5,7 +5,7 @@ type SpanChangeTitleType = {
     onChange: (newTitle: string) => void
 }
 
-const SpanChangeTitle = ({title, onChange, ...props}: SpanChangeTitleType) => {
+const SpanChangeTitle = React.memo (({title, onChange, ...props}: SpanChangeTitleType) => {
 
     const [editMode, setEditMode] = useState<boolean>(true)
     const [newtitle, setNewTitle] = useState(title)
@@ -25,6 +25,6 @@ const SpanChangeTitle = ({title, onChange, ...props}: SpanChangeTitleType) => {
             : <input value={newtitle} onChange={onChangeHandler} onBlur={addNewTitle} autoFocus/>
 
     );
-};
+});
 
 export default SpanChangeTitle;

@@ -4,7 +4,9 @@ type InputForAddType = {
     item: (newTitle: string) => void
 }
 
-const InputForAdd = ({item, ...props}: InputForAddType) => {
+const InputForAdd = React.memo(({item, ...props}: InputForAddType) => {
+
+    console.log('AddInput')
 
     const [title, setTitle] = useState('')
     const [error, setError] = useState<string | null>(null)
@@ -18,7 +20,9 @@ const InputForAdd = ({item, ...props}: InputForAddType) => {
         }
     }
     const onChangeTitleHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        setError('')
+        if (error !== null) {
+            setError(null)
+        }
         setTitle(e.currentTarget.value)
     }
     const addTaskOnKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
@@ -40,6 +44,6 @@ const InputForAdd = ({item, ...props}: InputForAddType) => {
             {error && <div className={'errorMessage'}>{error}</div>}
         </div>
     );
-};
+});
 
 export default InputForAdd;
