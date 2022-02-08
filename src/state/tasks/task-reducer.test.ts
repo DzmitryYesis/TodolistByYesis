@@ -1,6 +1,7 @@
 import {TodoTaskType} from '../../App';
 import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC, tasksReducer} from './task-reducer';
 import {addTodolistAC, removeTodolistAC} from '../todolist/todolist-reducer';
+import {TaskPriorities, TaskStatuses} from '../../api/todolist-api';
 
 
 let startState: TodoTaskType
@@ -9,14 +10,80 @@ beforeEach(() => {
 
     startState = {
         'todolistId1': [
-            {id: '1', title: 'HTML', isDone: true},
-            {id: '2', title: 'REACTJS', isDone: false},
-            {id: '3', title: 'CSS', isDone: false}
+            {
+                id: '1',
+                title: 'HTML',
+                status: TaskStatuses.Completed,
+                todoListId: 'todolistId1',
+                startDate: '',
+                deadline: '',
+                addedDate: '',
+                order: 0,
+                priority: TaskPriorities.Low,
+                description: ''
+            },
+            {
+                id: '2',
+                title: 'REACTJS',
+                status: TaskStatuses.New,
+                todoListId: 'todolistId1',
+                startDate: '',
+                deadline: '',
+                addedDate: '',
+                order: 0,
+                priority: TaskPriorities.Low,
+                description: ''
+            },
+            {
+                id: '3',
+                title: 'CSS',
+                status: TaskStatuses.New,
+                todoListId: 'todolistId1',
+                startDate: '',
+                deadline: '',
+                addedDate: '',
+                order: 0,
+                priority: TaskPriorities.Low,
+                description: ''
+            }
         ],
         'todolistId2': [
-            {id: '1', title: 'TS', isDone: false},
-            {id: '2', title: 'SalesForce', isDone: true},
-            {id: '3', title: 'Redux', isDone: false}
+            {
+                id: '1',
+                title: 'TS',
+                status: TaskStatuses.New,
+                todoListId: 'todolistId1',
+                startDate: '',
+                deadline: '',
+                addedDate: '',
+                order: 0,
+                priority: TaskPriorities.Low,
+                description: ''
+            },
+            {
+                id: '2',
+                title: 'SalesForce',
+                status: TaskStatuses.Completed,
+                todoListId: 'todolistId1',
+                startDate: '',
+                deadline: '',
+                addedDate: '',
+                order: 0,
+                priority: TaskPriorities.Low,
+                description: ''
+            },
+            {
+                id: '3',
+                title: 'Redux',
+                status: TaskStatuses.New,
+                todoListId: 'todolistId1',
+                startDate: '',
+                deadline: '',
+                addedDate: '',
+                order: 0,
+                priority: TaskPriorities.Low,
+                description: ''
+            }
         ]
     }
 })
@@ -45,17 +112,17 @@ test('correct task should be added from correct array', () => {
     expect(endState['todolistId2'].length).toBe(4);
     expect(endState['todolistId2'][0].id).toBeDefined();
     expect(endState['todolistId2'][0].title).toBe('juce');
-    expect(endState['todolistId2'][0].isDone).toBe(false);
+    expect(endState['todolistId2'][0].status).toBe(TaskStatuses.New);
 })
 
 test('correct task status should be changed', () => {
 
-    const endState = tasksReducer(startState, changeTaskStatusAC('todolistId2', '2'))
+    const endState = tasksReducer(startState, changeTaskStatusAC('todolistId2', '2', TaskStatuses.New ))
 
     expect(endState['todolistId1'].length).toBe(3);
     expect(endState['todolistId2'].length).toBe(3);
-    expect(endState['todolistId2'][1].isDone).toBe(false);
-    expect(endState['todolistId1'][1].isDone).toBe(false);
+    expect(endState['todolistId2'][1].status).toBe(TaskStatuses.New);
+    expect(endState['todolistId1'][1].status).toBe(TaskStatuses.New);
 })
 
 test('correct task title should be changed', () => {

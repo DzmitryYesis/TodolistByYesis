@@ -6,7 +6,7 @@ import InputForAdd from './components/InputForAdd';
 import {
     addTodolistAC,
     changeTodolistFilterAC, changeTodolistTitleAC, FilterType,
-    removeTodolistAC,
+    removeTodolistAC, TodolistDomainType,
     todolistReducer
 } from './state/todolist/todolist-reducer';
 import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC, tasksReducer} from './state/tasks/task-reducer';
@@ -23,9 +23,10 @@ function AppWithReducer() {
     const todolistId1 = v1()
     const todolistId2 = v1()
 
+
     const [todolists, dispatchToTodolists] = useReducer(todolistReducer, [
-        {id: todolistId1, todolistTitle: 'What to learn', filter: 'all', addedDate: '', order: 1},
-        {id: todolistId2, todolistTitle: 'What to buy', filter: 'all', addedDate: '', order: 3}
+        {id: todolistId1, title: 'What to learn', filter: 'all', addedDate: '', order: 1},
+        {id: todolistId2, title: 'What to buy', filter: 'all', addedDate: '', order: 3}
     ])
 
     const [tasks, dispatchToTasks] = useReducer(tasksReducer, {
@@ -106,8 +107,8 @@ function AppWithReducer() {
     }
     const addTodolist = (newTitle: string) => {
         const action = addTodolistAC(newTitle)
-        dispatchToTodolists(action)
         dispatchToTasks(action)
+        dispatchToTodolists(action)
     }
     const changeTodolistTitle = (todolistId: string, title: string) => {
         dispatchToTodolists(changeTodolistTitleAC(todolistId, title))
@@ -118,7 +119,7 @@ function AppWithReducer() {
         <div className="App">
             <InputForAdd item={addTodolist}/>
             {
-                todolists.map(tl => {
+                todolists.map((tl:TodolistDomainType) => {
                     let tasksFiltered = tasks[tl.id]
                     if (tl.filter === 'active') {
                         tasksFiltered = tasks[tl.id].filter(t => t.status === TaskStatuses.New)
@@ -130,7 +131,7 @@ function AppWithReducer() {
                         <Todolists
                             key={tl.id}
                             todolistId={tl.id}
-                            todolistTitle={tl.todolistTitle}
+                            todolistTitle={tl.title}
                             tasks={tasksFiltered}
                             filter={tl.filter}
                             removeTask={removeTask}
