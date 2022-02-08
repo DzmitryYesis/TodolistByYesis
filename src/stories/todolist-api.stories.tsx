@@ -1,27 +1,17 @@
 import React, {useEffect, useState} from 'react';
-import axios from 'axios';
+import {todolistAPI} from '../api/todolist-api';
 
 export default {
     title: 'API'
 }
 
-const settings = {
-    withCredentials: true,
-    headers: {
-        'API-KEY': '0aa73782-910d-40ce-8ee8-c0a12e637003'
-    }
-}
-
 export const GetTodolists = () => {
     const [state, setState] = useState<any>(null)
     useEffect(() => {
-        // здесь мы будем делать запрос и ответ закидывать в стейт.
-        // который в виде строки будем отображать в div-ке
-        axios.get('https://social-network.samuraijs.com/api/1.1/todo-lists', settings)
+        todolistAPI.getTodolists()
             .then((res) => {
                 setState(res.data)
             })
-
     }, [])
 
     return <div>{JSON.stringify(state)}</div>
@@ -31,7 +21,7 @@ export const CreateTodolist = () => {
     const [title, setTitle] = useState<string>('')
 
     const createTodolist = () => {
-        axios.post('https://social-network.samuraijs.com/api/1.1/todo-lists', {title}, settings)
+        todolistAPI.createTodolist(title)
             .then((res) => {
                 setState(res.data)
             })
@@ -50,7 +40,7 @@ export const DeleteTodolist = () => {
     const [state, setState] = useState<any>(null)
     const [todolistId, setTodolistId] = useState<string>('')
     const deleteTodolist = () => {
-        axios.delete(`https://social-network.samuraijs.com/api/1.1/todo-lists/${todolistId}`, settings)
+        todolistAPI.deleteTodolist(todolistId)
             .then((res) => {
                 setState(res.data)
             })
@@ -70,10 +60,11 @@ export const UpdateTodolistTitle = () => {
     const [todolistId, setTodolistId] = useState<string>('')
     const [title, setTitle] = useState<string>('')
     const updateTodolistTitle = () => {
-        axios.put(`https://social-network.samuraijs.com/api/1.1/todo-lists/${todolistId}`, {title}, settings)
+        todolistAPI.updateTodolistTitle(todolistId, title)
             .then((res) => {
                 setState(res.data)
             })
+
     }
 
     return <div> {JSON.stringify(state)}
