@@ -29,6 +29,7 @@ export const GetTodolists = () => {
 export const CreateTodolist = () => {
     const [state, setState] = useState<any>(null)
     const [title, setTitle] = useState<string>('')
+
     const createTodolist = () => {
         axios.post('https://social-network.samuraijs.com/api/1.1/todo-lists', {title}, settings)
             .then((res) => {
@@ -41,19 +42,26 @@ export const CreateTodolist = () => {
             <input placeholder={'title'} value={title} onChange={(e) => {
                 setTitle(e.currentTarget.value)
             }}/>
-            <button onClick={createTodolist}>Create</button>
+            <button onClick={createTodolist}>Create Todolist</button>
         </div>
     </div>
 }
 export const DeleteTodolist = () => {
     const [state, setState] = useState<any>(null)
-    useEffect(() => {
-    }, [])
+    const [todolistId, setTodolistId] = useState<string>('')
+    const deleteTodolist = () => {
+        axios.delete(`https://social-network.samuraijs.com/api/1.1/todo-lists/${todolistId}`, settings)
+            .then((res) => {
+                setState(res.data)
+            })
+    }
 
     return <div> {JSON.stringify(state)}
         <div>
-            <input/>
-            <button></button>
+            <input placeholder={'todolistId'} value={todolistId} onChange={(e) => {
+                setTodolistId(e.currentTarget.value)
+            }}/>
+            <button onClick={deleteTodolist}>Delete Todolist</button>
         </div>
     </div>
 }
