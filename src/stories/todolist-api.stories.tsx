@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {todolistAPI} from '../api/todolist-api';
+import {todolistAPI, UpdateTaskType} from '../api/todolist-api';
 
 export default {
     title: 'API'
@@ -119,6 +119,64 @@ export const CreateTask = () => {
                 setTitle(e.currentTarget.value)
             }}/>
             <button onClick={createTask}>Create Task</button>
+        </div>
+    </div>
+}
+export const DeleteTask = () => {
+    const [state, setState] = useState<any>(null)
+    const [todolistId, setTodolistId] = useState<string>('')
+    const [taskId, setTaskId] = useState<string>('')
+    const deleteTask = () => {
+        todolistAPI.deleteTask(todolistId, taskId)
+            .then((res) => {
+                setState(res.data)
+            })
+
+    }
+
+    return <div> {JSON.stringify(state)}
+        <div>
+            <input placeholder={'todolistId'} value={todolistId} onChange={(e) => {
+                setTodolistId(e.currentTarget.value)
+            }}/>
+            <input placeholder={'taskId'} value={taskId} onChange={(e) => {
+                setTaskId(e.currentTarget.value)
+            }}/>
+            <button onClick={deleteTask}>Delete Task</button>
+        </div>
+    </div>
+}
+export const UpdateTask = () => {
+    const [state, setState] = useState<any>(null)
+    const [todolistId, setTodolistId] = useState<string>('')
+    const [taskId, setTaskId] = useState<string>('')
+
+    const model: UpdateTaskType = {
+        title: 'Mama mia',
+        deadLine: '',
+        startDate: '',
+        description: 'tyryty',
+        priority: 2,
+        status: 2
+    }
+
+    const updateTask = () => {
+        todolistAPI.updateTask(todolistId, taskId, model)
+            .then((res) => {
+                setState(res.data)
+            })
+
+    }
+
+    return <div> {JSON.stringify(state)}
+        <div>
+            <input placeholder={'todolistId'} value={todolistId} onChange={(e) => {
+                setTodolistId(e.currentTarget.value)
+            }}/>
+            <input placeholder={'taskId'} value={taskId} onChange={(e) => {
+                setTaskId(e.currentTarget.value)
+            }}/>
+            <button onClick={updateTask}>Update Task</button>
         </div>
     </div>
 }
