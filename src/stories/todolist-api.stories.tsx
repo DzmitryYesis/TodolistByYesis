@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 
-// export default {
-//     title: 'API'
-// }
+export default {
+    title: 'API'
+}
 
 const settings = {
     withCredentials: true,
@@ -29,13 +29,19 @@ export const GetTodolists = () => {
 export const CreateTodolist = () => {
     const [state, setState] = useState<any>(null)
     const [title, setTitle] = useState<string>('')
-    useEffect(() => {
-    }, [])
+    const createTodolist = () => {
+        axios.post('https://social-network.samuraijs.com/api/1.1/todo-lists', {title}, settings)
+            .then((res) => {
+                setState(res.data)
+            })
+    }
 
     return <div> {JSON.stringify(state)}
         <div>
-            <input/>
-            <button>Create</button>
+            <input placeholder={'title'} value={title} onChange={(e) => {
+                setTitle(e.currentTarget.value)
+            }}/>
+            <button onClick={createTodolist}>Create</button>
         </div>
     </div>
 }
