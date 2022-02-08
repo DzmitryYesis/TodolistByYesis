@@ -1,25 +1,21 @@
-import React, {ChangeEvent, KeyboardEvent, useCallback, useState} from 'react';
-import {FilterType} from './App';
+import React, {useCallback} from 'react';
 import InputForAdd from './components/InputForAdd';
 import SpanChangeTitle from './components/SpanChangeTitle';
 import Task from './components/Task';
+import {TaskStatuses, TaskType} from './api/todolist-api';
+import {FilterType} from './state/todolist/todolist-reducer';
 
-export type TasksType = {
-    id: string
-    title: string
-    isDone: boolean
-}
 
 type TodolistType = {
     key: string
     todolistId: string
     todolistTitle: string
-    tasks: Array<TasksType>
+    tasks: Array<TaskType>
     filter: FilterType
     removeTask: (todolistId: string, taskId: string) => void
     changeFilter: (todolistId: string, value: FilterType) => void
     addTask: (todolistId: string, newTitle: string) => void
-    changeStatus: (todolistId: string, taskId: string, newIsDone: boolean) => void
+    changeStatus: (todolistId: string, taskId: string, status:TaskStatuses) => void
     removeTodolist: (todolistId: string) => void
     addTodolist: (newTitle: string) => void
     changeTodolistTitle: (todolistId: string, newTitle: string) => void
@@ -56,10 +52,10 @@ export const Todolists = React.memo(({
 
 
     if (filter === 'active') {
-        tasks = tasks.filter(t => t.isDone === false)
+        tasks = tasks.filter(t => t.status === TaskStatuses.New)
     }
     if (filter === 'completed') {
-        tasks = tasks.filter(t => t.isDone === true)
+        tasks = tasks.filter(t => t.status === TaskStatuses.Completed)
     }
 
 

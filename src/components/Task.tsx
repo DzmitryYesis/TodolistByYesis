@@ -1,12 +1,12 @@
 import React, {ChangeEvent, useCallback} from 'react';
 import SpanChangeTitle from './SpanChangeTitle';
-import {TasksType} from '../Todolists';
+import {TaskStatuses, TaskType} from '../api/todolist-api';
 
 type TaskComponentType = {
     todolistId: string
-    task: TasksType
+    task: TaskType
     removeTask: (todolistId: string, taskId: string) => void
-    changeStatus: (todolistId: string, taskId: string, newIsDone: boolean) => void
+    changeStatus: (todolistId: string, taskId: string, status:TaskStatuses) => void
     changeTaskTitle: (todolistId: string, taskId: string, newTitle: string) => void
 }
 
@@ -27,7 +27,7 @@ const Task = React.memo(({
         changeTaskTitle(todolistId, task.id, newTitle)
     }, [changeTaskTitle, todolistId, task.id])
     return (
-        <li key={task.id} className={task.isDone ? 'is-done' : ''}>
+        <li key={task.id} className={task.status===TaskStatuses.Completed ? 'is-done' : ''}>
             <input type={'checkbox'} checked={task.isDone} onChange={changeStatusTasksHandler}/>
             <SpanChangeTitle title={task.title} onChange={functionForChangeTaskTitle}/>
             <button onClick={removeTaskHandler}>X</button>
