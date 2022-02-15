@@ -3,11 +3,11 @@ import './App.css';
 import Todolists from './Todolists';
 import InputForAdd from './components/InputForAdd';
 import {
-    addTodolistAC, addTodolistTC,
-    changeTodolistFilterAC, changeTodolistTitleAC, changeTodolistTitleTC, FilterType,
-    removeTodolistAC, removeTodolistTC, setTodolistsTC, TodolistDomainType,
+    addTodolistTC,
+    changeTodolistFilterAC, changeTodolistTitleTC, FilterType,
+    removeTodolistTC, setTodolistsTC, TodolistDomainType,
 } from './state/todolist/todolist-reducer';
-import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC, removeTaskTC} from './state/tasks/task-reducer';
+import {addTaskAC, addTaskTC, changeTaskStatusAC, changeTaskTitleAC, removeTaskTC} from './state/tasks/task-reducer';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppRootStateType} from './state/store';
 import {TaskStatuses, TaskType} from './api/todolist-api';
@@ -34,7 +34,7 @@ function AppWithRedux() {
         dispatch(removeTaskTC(todolistId, taskId))
     }, [dispatch])
     const addTask = useCallback((todolistId: string, newTitle: string) => {
-        dispatch(addTaskAC(todolistId, newTitle))
+        dispatch(addTaskTC(todolistId, newTitle))
     }, [dispatch])
     const changeStatus = useCallback((todolistId: string, taskId: string, status: TaskStatuses) => {
         dispatch(changeTaskStatusAC(todolistId, taskId, status))
