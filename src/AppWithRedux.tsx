@@ -8,10 +8,7 @@ import {
     removeTodolistTC, setTodolistsTC, TodolistDomainType,
 } from './state/todolist/todolist-reducer';
 import {
-    addTaskAC,
-    addTaskTC,
-    changeTaskStatusAC,
-    changeTaskTitleAC, changeTaskTitleTC,
+    addTaskTC, changeTaskTitleTC,
     removeTaskTC,
     updateTaskStatusTC
 } from './state/tasks/task-reducer';
