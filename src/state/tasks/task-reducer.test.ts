@@ -93,13 +93,68 @@ test('correct task should be deleted from correct array', () => {
     const endState = tasksReducer(startState, removeTaskAC('todolistId2', '2'))
     expect(endState).toEqual({
         'todolistId1': [
-            {id: '1', title: 'HTML', isDone: true},
-            {id: '2', title: 'REACTJS', isDone: false},
-            {id: '3', title: 'CSS', isDone: false}
+            {
+                id: '1',
+                title: 'HTML',
+                status: TaskStatuses.Completed,
+                todoListId: 'todolistId1',
+                startDate: '',
+                deadline: '',
+                addedDate: '',
+                order: 0,
+                priority: TaskPriorities.Low,
+                description: ''
+            },
+            {
+                id: '2',
+                title: 'REACTJS',
+                status: TaskStatuses.New,
+                todoListId: 'todolistId1',
+                startDate: '',
+                deadline: '',
+                addedDate: '',
+                order: 0,
+                priority: TaskPriorities.Low,
+                description: ''
+            },
+            {
+                id: '3',
+                title: 'CSS',
+                status: TaskStatuses.New,
+                todoListId: 'todolistId1',
+                startDate: '',
+                deadline: '',
+                addedDate: '',
+                order: 0,
+                priority: TaskPriorities.Low,
+                description: ''
+            }
         ],
         'todolistId2': [
-            {id: '1', title: 'TS', isDone: false},
-            {id: '3', title: 'Redux', isDone: false}
+            {
+                id: '1',
+                title: 'TS',
+                status: TaskStatuses.New,
+                todoListId: 'todolistId1',
+                startDate: '',
+                deadline: '',
+                addedDate: '',
+                order: 0,
+                priority: TaskPriorities.Low,
+                description: ''
+            },
+            {
+                id: '3',
+                title: 'Redux',
+                status: TaskStatuses.New,
+                todoListId: 'todolistId1',
+                startDate: '',
+                deadline: '',
+                addedDate: '',
+                order: 0,
+                priority: TaskPriorities.Low,
+                description: ''
+            }
         ]
     });
 })
