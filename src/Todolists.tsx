@@ -1,9 +1,11 @@
-import React, {useCallback} from 'react';
+import React, {useCallback, useEffect} from 'react';
 import InputForAdd from './components/InputForAdd';
 import SpanChangeTitle from './components/SpanChangeTitle';
 import Task from './components/Task';
 import {TaskStatuses, TaskType} from './api/todolist-api';
 import {FilterType} from './state/todolist/todolist-reducer';
+import {useDispatch} from 'react-redux';
+import {setTasksTC} from './state/tasks/task-reducer';
 
 
 type TodolistType = {
@@ -38,6 +40,11 @@ export const Todolists = React.memo(({
                                          ...props
                                      }: TodolistType) => {
     console.log('Todolist')
+
+    const dispatch = useDispatch()
+    useEffect(()=>{
+        dispatch(setTasksTC(todolistId))
+    },[])
 
     const filterAll = useCallback(() => changeFilter(todolistId, 'all'), [changeFilter, todolistId])
     const filterActive = useCallback(() => changeFilter(todolistId, 'active'), [changeFilter, todolistId])
