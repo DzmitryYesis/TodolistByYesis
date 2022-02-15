@@ -3,8 +3,8 @@ import './App.css';
 import Todolists from './Todolists';
 import InputForAdd from './components/InputForAdd';
 import {
-    addTodolistAC,
-    changeTodolistFilterAC, changeTodolistTitleAC, FilterType,
+    addTodolistAC, addTodolistTC,
+    changeTodolistFilterAC, changeTodolistTitleAC, changeTodolistTitleTC, FilterType,
     removeTodolistAC, removeTodolistTC, setTodolistsTC, TodolistDomainType,
 } from './state/todolist/todolist-reducer';
 import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC, removeTaskTC} from './state/tasks/task-reducer';
@@ -52,10 +52,10 @@ function AppWithRedux() {
         dispatch(removeTodolistTC(todolistId))
     }, [dispatch])
     const addTodolist = useCallback((newTitle: string) => {
-        dispatch(addTodolistAC(newTitle))
+        dispatch(addTodolistTC(newTitle))
     }, [dispatch])
     const changeTodolistTitle = useCallback((todolistId: string, newTitle: string) => {
-        dispatch(changeTodolistTitleAC(todolistId, newTitle))
+        dispatch(changeTodolistTitleTC(todolistId, newTitle))
     }, [dispatch])
 
 
