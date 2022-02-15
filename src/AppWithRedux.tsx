@@ -11,7 +11,7 @@ import {
     addTaskAC,
     addTaskTC,
     changeTaskStatusAC,
-    changeTaskTitleAC,
+    changeTaskTitleAC, changeTaskTitleTC,
     removeTaskTC,
     updateTaskStatusTC
 } from './state/tasks/task-reducer';
@@ -47,7 +47,7 @@ function AppWithRedux() {
         dispatch(updateTaskStatusTC(todolistId, taskId, status))
     }, [dispatch])
     const changeTaskTitle = useCallback((todolistId: string, taskId: string, newTitle: string) => {
-        dispatch(changeTaskTitleAC(todolistId, taskId, newTitle))
+        dispatch(changeTaskTitleTC(todolistId, taskId, newTitle))
     }, [dispatch])
 
     // Todolists function
