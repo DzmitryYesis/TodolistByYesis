@@ -21,7 +21,7 @@ export type TodoTaskType = {
     [key: string]: Array<TaskType>
 }
 
-function AppWithRedux() {
+function App() {
     console.log('App')
 
     const dispatch = useDispatch()
@@ -95,4 +95,4 @@ function AppWithRedux() {
     );
 }
 
-export default AppWithRedux;
+export default App;

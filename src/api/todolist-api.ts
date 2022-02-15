@@ -8,64 +8,7 @@ const instance = axios.create({
     }
 })
 
-export type TodolistType = {
-    id: string,
-    title: string,
-    addedDate: string,
-    order: number
-}
-
-type ResponseType<D = {}> = {
-    fieldsErrors: Array<string>
-    messages: Array<string>
-    resultCode: number
-    data: D
-}
-
-export enum TaskStatuses {
-    New,
-    InProgress,
-    Completed,
-    Draft
-}
-
-export enum TaskPriorities {
-    Low,
-    Middle,
-    Mi,
-    Urgently,
-    Later
-}
-
-export type TaskType = {
-    addedDate: string
-    deadline: string
-    description: string
-    id: string
-    order: number
-    priority: TaskPriorities
-    startDate: string
-    status: TaskStatuses
-    title: string
-    todoListId: string
-}
-
-type GetTaskType = {
-    totalCount: number,
-    error: string | null,
-    items: Array<TaskType>
-}
-
-export type UpdateTaskType = {
-    title: string
-    description: string
-    status: number
-    priority: number
-    startDate: string
-    deadLine: string
-}
-
-
+//api
 export const todolistAPI = {
     getTodolists() {
         return instance.get<Array<TodolistType>>('todo-lists')
@@ -91,4 +34,56 @@ export const todolistAPI = {
     updateTask(todolistId: string, taskId: string, model: UpdateTaskType) {
         return instance.put<ResponseType<{ item: TaskType }>>(`todo-lists/${todolistId}/tasks/${taskId}`, model)
     }
+}
+
+//types
+export type TodolistType = {
+    id: string,
+    title: string,
+    addedDate: string,
+    order: number
+}
+type ResponseType<D = {}> = {
+    fieldsErrors: Array<string>
+    messages: Array<string>
+    resultCode: number
+    data: D
+}
+export enum TaskStatuses {
+    New,
+    InProgress,
+    Completed,
+    Draft
+}
+export enum TaskPriorities {
+    Low,
+    Middle,
+    Mi,
+    Urgently,
+    Later
+}
+export type TaskType = {
+    addedDate: string
+    deadline: string
+    description: string
+    id: string
+    order: number
+    priority: TaskPriorities
+    startDate: string
+    status: TaskStatuses
+    title: string
+    todoListId: string
+}
+type GetTaskType = {
+    totalCount: number,
+    error: string | null,
+    items: Array<TaskType>
+}
+export type UpdateTaskType = {
+    title: string
+    description: string
+    status: number
+    priority: number
+    startDate: string
+    deadLine: string
 }
