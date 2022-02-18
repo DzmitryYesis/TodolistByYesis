@@ -1,5 +1,5 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
-import {Button, IconButton, TextField} from '@material-ui/core';
+import { IconButton, TextField} from '@material-ui/core';
 import {AddBox} from '@material-ui/icons';
 
 type InputForAddType = {
@@ -45,6 +45,7 @@ const InputForAdd = React.memo(({item, ...props}: InputForAddType) => {
                 error={!!error}
                 value={title}
                 onChange={onChangeTitleHandler}
+                onKeyPress={addTaskOnKeyPressHandler}
                 label={'Title'}
                 helperText={error}
             />

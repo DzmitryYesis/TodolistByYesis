@@ -1,11 +1,11 @@
 import React, {useCallback, useEffect} from 'react';
-import InputForAdd from './components/InputForAdd';
-import SpanChangeTitle from './components/SpanChangeTitle';
-import Task from './components/Task';
-import {TaskStatuses, TaskType} from './api/todolist-api';
-import {FilterType} from './state/todolist/todolist-reducer';
+import InputForAdd from '../../../components/InputForAdd';
+import SpanChangeTitle from '../../../components/SpanChangeTitle';
+import Task from './Task/Task';
+import {TaskStatuses, TaskType} from '../../../api/todolist-api';
+import {FilterType} from './todolist-reducer/todolist-reducer';
 import {useDispatch} from 'react-redux';
-import {setTasksTC} from './state/tasks/task-reducer';
+import {setTasksTC} from './tasks-reducer/task-reducer';
 import {Button, ButtonGroup, IconButton} from '@material-ui/core';
 import {Delete} from '@material-ui/icons';
 

@@ -87,3 +87,6 @@ export type UpdateTaskType = {
     startDate: string
     deadLine: string
 }
+export type TodoTaskType = {
+    [key: string]: Array<TaskType>
+}
