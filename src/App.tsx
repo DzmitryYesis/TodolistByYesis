@@ -1,5 +1,6 @@
 import React, {useCallback, useEffect} from 'react';
 import Todolists from './Todolists';
+import './App.css'
 import InputForAdd from './components/InputForAdd';
 import {
     addTodolistTC,
