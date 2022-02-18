@@ -1,6 +1,8 @@
 import React, {ChangeEvent, useCallback} from 'react';
 import SpanChangeTitle from './SpanChangeTitle';
 import {TaskStatuses, TaskType} from '../api/todolist-api';
+import {Delete} from '@material-ui/icons';
+import {IconButton} from '@material-ui/core';
 
 type TaskComponentType = {
     todolistId: string
@@ -31,7 +33,9 @@ const Task = React.memo(({
         <li key={task.id} className={task.status === TaskStatuses.Completed ? 'is-done' : ''}>
             <input type={'checkbox'} checked={task.status === TaskStatuses.Completed} onChange={changeStatusTasksHandler}/>
             <SpanChangeTitle title={task.title} onChange={functionForChangeTaskTitle}/>
-            <button onClick={removeTaskHandler}>X</button>
+            <IconButton onClick={removeTaskHandler}>
+                <Delete/>
+            </IconButton>
         </li>)
 });
 

@@ -6,7 +6,7 @@ import {TaskStatuses, TaskType} from './api/todolist-api';
 import {FilterType} from './state/todolist/todolist-reducer';
 import {useDispatch} from 'react-redux';
 import {setTasksTC} from './state/tasks/task-reducer';
-import {IconButton} from '@material-ui/core';
+import {Button, ButtonGroup, IconButton} from '@material-ui/core';
 import {Delete} from '@material-ui/icons';
 
 
@@ -72,7 +72,6 @@ export const Todolists = React.memo(({
         <div>
             <h3>
                 <SpanChangeTitle title={todolistTitle} onChange={functionForChangeTodolistTitle}/>
-                {/*<button onClick={removeTodolistHandler}>X</button>*/}
                 <IconButton onClick={removeTodolistHandler}>
                     <Delete/>
                 </IconButton>
@@ -93,10 +92,15 @@ export const Todolists = React.memo(({
                 }
             </ul>
             <div>
-                <button className={filter === 'all' ? 'active-filter' : ''} onClick={filterAll}>All</button>
-                <button className={filter === 'active' ? 'active-filter' : ''} onClick={filterActive}>Active</button>
-                <button className={filter === 'completed' ? 'active-filter' : ''} onClick={filterCompleted}>Completed
-                </button>
+                {/*<button className={filter === 'all' ? 'active-filter' : ''} onClick={filterAll}>All</button>*/}
+                {/*<button className={filter === 'active' ? 'active-filter' : ''} onClick={filterActive}>Active</button>*/}
+                {/*<button className={filter === 'completed' ? 'active-filter' : ''} onClick={filterCompleted}>Completed*/}
+                {/*</button>*/}
+                <ButtonGroup variant="text" aria-label="text button group">
+                    <Button className={filter === 'all' ? 'active-filter' : ''} onClick={filterAll}>All</Button>
+                    <Button className={filter === 'active' ? 'active-filter' : ''} onClick={filterActive}>Active</Button>
+                    <Button className={filter === 'completed' ? 'active-filter' : ''} onClick={filterCompleted}>Completed</Button>
+                </ButtonGroup>
             </div>
         </div>
     );
