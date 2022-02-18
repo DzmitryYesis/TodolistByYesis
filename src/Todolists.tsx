@@ -6,6 +6,8 @@ import {TaskStatuses, TaskType} from './api/todolist-api';
 import {FilterType} from './state/todolist/todolist-reducer';
 import {useDispatch} from 'react-redux';
 import {setTasksTC} from './state/tasks/task-reducer';
+import {IconButton} from '@material-ui/core';
+import {Delete} from '@material-ui/icons';
 
 
 type TodolistType = {
@@ -70,7 +72,10 @@ export const Todolists = React.memo(({
         <div>
             <h3>
                 <SpanChangeTitle title={todolistTitle} onChange={functionForChangeTodolistTitle}/>
-                <button onClick={removeTodolistHandler}>X</button>
+                {/*<button onClick={removeTodolistHandler}>X</button>*/}
+                <IconButton onClick={removeTodolistHandler}>
+                    <Delete/>
+                </IconButton>
             </h3>
             <InputForAdd item={functionForAddTask}/>
             <ul>
