@@ -41,11 +41,13 @@ const InputForAdd = React.memo(({item, ...props}: InputForAddType) => {
         <div>
             <TextField
                 variant="outlined"
-                className={error ? 'error' : ''}
+                error={!!error}
                 value={title}
-                onChange={onChangeTitleHandler} />
+                onChange={onChangeTitleHandler}
+                label={'Title'}
+                helperText={error}
+            />
             <Button variant="contained" onClick={addTaskHandler} color={'primary'} size={'small'}>+</Button>
-            {error && <div className={'errorMessage'}>{error}</div>}
         </div>
     );
 });
