@@ -77,7 +77,7 @@ export const Todolists = React.memo(({
                 </IconButton>
             </h3>
             <InputForAdd item={functionForAddTask}/>
-            <ul>
+            <div>
                 {
                     tasks.map(t => {
                         return (
@@ -90,15 +90,18 @@ export const Todolists = React.memo(({
                         )
                     })
                 }
-            </ul>
+            </div>
             <div>
                 <ButtonGroup variant="text" aria-label="text button group">
-                    <Button className={filter === 'all' ? 'active-filter' : ''} onClick={filterAll}
-                            color={'default'}>All</Button>
-                    <Button className={filter === 'active' ? 'active-filter' : ''} onClick={filterActive}
-                            color={'primary'}>Active</Button>
-                    <Button className={filter === 'completed' ? 'active-filter' : ''} onClick={filterCompleted}
-                            color={'secondary'}>Completed</Button>
+                    <Button onClick={filterAll}
+                            color={'default'}
+                            variant={filter === 'all' ? 'outlined' : 'text'}>All</Button>
+                    <Button onClick={filterActive}
+                            color={'primary'}
+                            variant={filter === 'active' ? 'outlined' : 'text'}>Active</Button>
+                    <Button onClick={filterCompleted}
+                            color={'secondary'}
+                            variant={filter === 'completed' ? 'outlined' : 'text'}>Completed</Button>
                 </ButtonGroup>
             </div>
         </div>

@@ -1,5 +1,6 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
-import {Button, TextField} from '@material-ui/core';
+import {Button, IconButton, TextField} from '@material-ui/core';
+import {AddBox} from '@material-ui/icons';
 
 type InputForAddType = {
     item: (newTitle: string) => void
@@ -47,7 +48,9 @@ const InputForAdd = React.memo(({item, ...props}: InputForAddType) => {
                 label={'Title'}
                 helperText={error}
             />
-            <Button variant="contained" onClick={addTaskHandler} color={'primary'} size={'small'}>+</Button>
+            <IconButton color={'primary'} onClick={addTaskHandler}>
+                <AddBox/>
+            </IconButton>
         </div>
     );
 });
