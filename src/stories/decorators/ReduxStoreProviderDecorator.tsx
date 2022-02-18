@@ -5,10 +5,12 @@ import {todolistReducer} from '../../features/TodolistsList/Todolist/todolist-re
 import {v1} from 'uuid';
 import {AppRootStateType} from '../../app/store';
 import {TaskPriorities, TaskStatuses} from '../../api/todolist-api';
+import {appReducer} from '../../app/app-reducer';
 
 const rootReducer = combineReducers({
   tasks: tasksReducer,
-  todolists: todolistReducer
+  todolists: todolistReducer,
+  app: appReducer
 })
 
 const initialGlobalState:AppRootStateType = {
@@ -65,6 +67,9 @@ const initialGlobalState:AppRootStateType = {
         priority: TaskPriorities.Low,
         description: ''}
     ]
+  },
+  app:{
+    status: 'loading'
   }
 };
 

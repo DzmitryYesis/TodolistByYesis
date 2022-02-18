@@ -1,9 +1,9 @@
 
 const initialState = {
-    status: 'loading' as null | string
+    status: 'loading' as RequestStatusType
 }
 
-export const appReducer = (state:InitialStateType = initialState, action:AppActionType) =>{
+export const appReducer = (state:InitialStateType = initialState, action:AppActionType):InitialStateType =>{
     switch (action.type) {
         case 'APP/SET-STATUS':
             return {...state, status: action.status}
