@@ -19,7 +19,7 @@ type TodolistType = {
     removeTask: (todolistId: string, taskId: string) => void
     changeFilter: (todolistId: string, value: FilterType) => void
     addTask: (todolistId: string, newTitle: string) => void
-    changeStatus: (todolistId: string, taskId: string, status:TaskStatuses) => void
+    changeStatus: (todolistId: string, taskId: string, status: TaskStatuses) => void
     removeTodolist: (todolistId: string) => void
     addTodolist: (newTitle: string) => void
     changeTodolistTitle: (todolistId: string, newTitle: string) => void
@@ -44,9 +44,9 @@ export const Todolists = React.memo(({
     console.log('Todolist')
 
     const dispatch = useDispatch()
-    useEffect(()=>{
+    useEffect(() => {
         dispatch(setTasksTC(todolistId))
-    },[])
+    }, [])
 
     const filterAll = useCallback(() => changeFilter(todolistId, 'all'), [changeFilter, todolistId])
     const filterActive = useCallback(() => changeFilter(todolistId, 'active'), [changeFilter, todolistId])
@@ -92,14 +92,13 @@ export const Todolists = React.memo(({
                 }
             </ul>
             <div>
-                {/*<button className={filter === 'all' ? 'active-filter' : ''} onClick={filterAll}>All</button>*/}
-                {/*<button className={filter === 'active' ? 'active-filter' : ''} onClick={filterActive}>Active</button>*/}
-                {/*<button className={filter === 'completed' ? 'active-filter' : ''} onClick={filterCompleted}>Completed*/}
-                {/*</button>*/}
                 <ButtonGroup variant="text" aria-label="text button group">
-                    <Button className={filter === 'all' ? 'active-filter' : ''} onClick={filterAll}>All</Button>
-                    <Button className={filter === 'active' ? 'active-filter' : ''} onClick={filterActive}>Active</Button>
-                    <Button className={filter === 'completed' ? 'active-filter' : ''} onClick={filterCompleted}>Completed</Button>
+                    <Button className={filter === 'all' ? 'active-filter' : ''} onClick={filterAll}
+                            color={'default'}>All</Button>
+                    <Button className={filter === 'active' ? 'active-filter' : ''} onClick={filterActive}
+                            color={'primary'}>Active</Button>
+                    <Button className={filter === 'completed' ? 'active-filter' : ''} onClick={filterCompleted}
+                            color={'secondary'}>Completed</Button>
                 </ButtonGroup>
             </div>
         </div>

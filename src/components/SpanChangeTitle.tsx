@@ -1,11 +1,12 @@
 import React, {ChangeEvent, useState} from 'react';
+import {TextField} from '@material-ui/core';
 
 type SpanChangeTitleType = {
     title: string
     onChange: (newTitle: string) => void
 }
 
-const SpanChangeTitle = React.memo (({title, onChange, ...props}: SpanChangeTitleType) => {
+const SpanChangeTitle = React.memo(({title, onChange, ...props}: SpanChangeTitleType) => {
 
     const [editMode, setEditMode] = useState<boolean>(true)
     const [newtitle, setNewTitle] = useState(title)
@@ -22,7 +23,8 @@ const SpanChangeTitle = React.memo (({title, onChange, ...props}: SpanChangeTitl
     return (
         editMode
             ? <span onDoubleClick={() => setEditMode(!editMode)}>{newtitle}</span>
-            : <input value={newtitle} onChange={onChangeHandler} onBlur={addNewTitle} autoFocus/>
+            :
+            <TextField variant={'outlined'} value={newtitle} onChange={onChangeHandler} onBlur={addNewTitle} autoFocus/>
 
     );
 });

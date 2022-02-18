@@ -1,5 +1,5 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
-import {Button} from '@material-ui/core';
+import {Button, TextField} from '@material-ui/core';
 
 type InputForAddType = {
     item: (newTitle: string) => void
@@ -39,8 +39,11 @@ const InputForAdd = React.memo(({item, ...props}: InputForAddType) => {
 
     return (
         <div>
-            <input className={error ? 'error' : ''} value={title} onChange={onChangeTitleHandler}
-                   onKeyPress={addTaskOnKeyPressHandler}/>
+            <TextField
+                variant="outlined"
+                className={error ? 'error' : ''}
+                value={title}
+                onChange={onChangeTitleHandler} />
             <Button variant="contained" onClick={addTaskHandler} color={'primary'} size={'small'}>+</Button>
             {error && <div className={'errorMessage'}>{error}</div>}
         </div>
