@@ -4,7 +4,7 @@ import {
 import {TaskStatuses, TaskType, todolistAPI, TodoTaskType} from '../../../../api/todolist-api';
 import {Dispatch} from 'redux';
 import {AppRootStateType} from '../../../../app/store';
-import {setAppStatusAC} from '../../../../app/app-reducer';
+import {setAppStatusAC, setErrorAC} from '../../../../app/app-reducer';
 
 const initialState: TodoTaskType = {}
 
@@ -23,14 +23,16 @@ export const tasksReducer = (state: TodoTaskType = initialState, action: TaskAct
         case 'ADD-TASK':
             return {...state, [action.task.todoListId]: [action.task, ...state[action.task.todoListId]]}
         case 'CHANGE-TASK-STATUS':
-            return {...state,
+            return {
+                ...state,
                 [action.todolistId]: state[action.todolistId].map(t => t.id === action.taskId ? {
                     ...t,
                     status: action.status
                 } : t)
             }
         case 'CHANGE-TASK-TITLE':
-            return {...state,
+            return {
+                ...state,
                 [action.todolistId]: state[action.todolistId].map(t => t.id === action.taskId ? {
                     ...t,
                     title: action.newTitle
@@ -89,8 +91,14 @@ export const addTaskTC = (todolistId: string, title: string) => (dispatch: Dispa
     dispatch(setAppStatusAC('loading'))
     todolistAPI.createTask(todolistId, title)
         .then((res) => {
-            dispatch(addTaskAC(res.data.data.item))
-            dispatch(setAppStatusAC('succeeded'))
+            if (res.data.resultCode === 0) {
+                dispatch(addTaskAC(res.data.data.item))
+                dispatch(setAppStatusAC('succeeded'))
+            } else {
+                dispatch(setErrorAC(res.data.messages[0]))
+                dispatch(setAppStatusAC('failed'))
+            }
+
         })
 }
 export const updateTaskStatusTC = (todolistId: string, taskId: string, status: TaskStatuses) => (dispatch: Dispatch<TaskActionType>, getState: () => AppRootStateType) => {
@@ -133,7 +141,7 @@ export const changeTaskTitleTC = (todolistId: string, taskId: string, title: str
         })
             .then((res) => {
                     dispatch(changeTaskTitleAC(todolistId, taskId, title))
-                dispatch(setAppStatusAC('succeeded'))
+                    dispatch(setAppStatusAC('succeeded'))
                 }
             )
     }
@@ -150,3 +158,4 @@ export type TaskActionType =
     | ReturnType<typeof setTodolistsAC>
     | ReturnType<typeof setTaskAC>
     | ReturnType<typeof setAppStatusAC>
+    | ReturnType<typeof setErrorAC>

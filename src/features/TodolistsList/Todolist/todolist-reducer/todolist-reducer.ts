@@ -1,6 +1,6 @@
 import {todolistAPI, TodolistType} from '../../../../api/todolist-api';
 import {Dispatch} from 'redux';
-import {setAppStatusAC} from '../../../../app/app-reducer';
+import {setAppStatusAC, setErrorAC} from '../../../../app/app-reducer';
 
 const initialState: Array<TodolistDomainType> = []
 
@@ -57,8 +57,14 @@ export const addTodolistTC = (title: string) => (dispatch: Dispatch<TodolistActi
     dispatch(setAppStatusAC('loading'))
     todolistAPI.createTodolist(title)
         .then((res) => {
-            dispatch(addTodolistAC(res.data.data.item))
-            dispatch(setAppStatusAC('succeeded'))
+            if (res.data.resultCode === 0) {
+                dispatch(addTodolistAC(res.data.data.item))
+                dispatch(setAppStatusAC('succeeded'))
+            } else {
+                dispatch(setErrorAC(res.data.messages[0]))
+                dispatch(setAppStatusAC('failed'))
+            }
+
         })
 }
 export const changeTodolistTitleTC = (todolistId: string, title: string) => (dispatch: Dispatch<TodolistActionType>) => {
@@ -79,6 +85,7 @@ export type TodolistActionType =
     | ReturnType<typeof changeTodolistTitleAC>
     | ReturnType<typeof setTodolistsAC>
     | ReturnType<typeof setAppStatusAC>
+    | ReturnType<typeof setErrorAC>
 export type TodolistDomainType = TodolistType & {
     filter: FilterType
 }

@@ -12,7 +12,6 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
 
 export function ErrorSnackbar() {
     const dispatch = useDispatch()
-    const [open, setOpen] = useState(true);
     const error = useSelector<AppRootStateType, string | null>(state => state.app.error)
 
     const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
@@ -23,7 +22,7 @@ export function ErrorSnackbar() {
     };
 
     return (
-        <Snackbar open={!!error} autoHideDuration={3000} onClose={handleClose}>
+        <Snackbar open={error !==null} autoHideDuration={6000} onClose={handleClose}>
             <Alert onClose={handleClose} severity="error" sx={{width: '100%'}}>
                 {error}
             </Alert>
