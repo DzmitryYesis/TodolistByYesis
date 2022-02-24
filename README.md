@@ -1,4 +1,5 @@
-Todo list
+# Todo list
+
 SPA for tasks management.
 
 Technologies: JavaScript, TypeScript, React, Redux, Material UI, SCSS.
