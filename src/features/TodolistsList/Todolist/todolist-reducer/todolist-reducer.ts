@@ -70,7 +70,7 @@ export const addTodolistTC = (title: string) => (dispatch: Dispatch<TodolistActi
                 dispatch(setAppStatusAC('succeeded'))
             } else {
                 dispatch(setErrorAC(res.data.messages[0]))
-
+                dispatch(setAppStatusAC('failed'))
             }
         })
         .catch(error => {
