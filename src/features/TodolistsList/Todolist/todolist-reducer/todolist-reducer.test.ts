@@ -1,6 +1,5 @@
 import {v1} from 'uuid';
 import {
-    addTodolistAC,
     changeTodolistFilterAC,
     changeTodolistTitleAC, FilterType,
     removeTodolistAC, TodolistDomainType,
@@ -17,8 +16,8 @@ beforeEach(() => {
 
 
     startState = [
-        {id: todolistId1, title: 'What to learn', filter: 'all', addedDate: '', order: 1},
-        {id: todolistId2, title: 'What to buy', filter: 'all', addedDate: '', order: 2}
+        {id: todolistId1, title: 'What to learn', filter: 'all', addedDate: '', order: 1, entityStatus:'idle'},
+        {id: todolistId2, title: 'What to buy', filter: 'all', addedDate: '', order: 2, entityStatus:'idle'}
     ]
 })
 

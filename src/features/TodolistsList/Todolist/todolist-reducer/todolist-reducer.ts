@@ -1,17 +1,17 @@
 import {todolistAPI, TodolistType} from '../../../../api/todolist-api';
 import {Dispatch} from 'redux';
-import {setAppStatusAC, setErrorAC} from '../../../../app/app-reducer';
+import {RequestStatusType, setAppStatusAC, setErrorAC} from '../../../../app/app-reducer';
 
 const initialState: Array<TodolistDomainType> = []
 
 export const todolistReducer = (state: Array<TodolistDomainType> = initialState, action: TodolistActionType): Array<TodolistDomainType> => {
     switch (action.type) {
         case 'SET-TODOLISTS':
-            return action.todolists.map(tl => ({...tl, filter: 'all'}))
+            return action.todolists.map(tl => ({...tl, filter: 'all', entityStatus:'idle'}))
         case 'REMOVE-TODOLIST':
             return state.filter(tl => tl.id !== action.todolistId)
         case 'ADD-TODOLIST':
-            return [{...action.todolist, filter: 'all'}, ...state]
+            return [{...action.todolist, filter: 'all', entityStatus:'idle'}, ...state]
         case 'CHANGE-TODOLIST-FILTER':
             return state.map(tl => tl.id === action.todolistId ? {...tl, filter: action.filter} : tl)
         case 'CHANGE-TODOLIST-TITLE':
@@ -88,4 +88,5 @@ export type TodolistActionType =
     | ReturnType<typeof setErrorAC>
 export type TodolistDomainType = TodolistType & {
     filter: FilterType
+    entityStatus: RequestStatusType
 }
