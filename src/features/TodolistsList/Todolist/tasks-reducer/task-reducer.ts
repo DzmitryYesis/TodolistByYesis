@@ -118,8 +118,17 @@ export const updateTaskStatusTC = (todolistId: string, taskId: string, status: T
             deadLine: task.deadline
         })
             .then((res) => {
-                dispatch(changeTaskStatusAC(todolistId, taskId, status))
-                dispatch(setAppStatusAC('succeeded'))
+                if (res.data.resultCode === 0) {
+                    dispatch(changeTaskStatusAC(todolistId, taskId, status))
+                    dispatch(setAppStatusAC('succeeded'))
+                } else {
+                    dispatch(setErrorAC(res.data.messages[0]))
+                    dispatch(setAppStatusAC('failed'))
+                }
+            })
+            .catch(error => {
+                dispatch(setErrorAC(error.message))
+                dispatch(setAppStatusAC('failed'))
             })
     }
 }
