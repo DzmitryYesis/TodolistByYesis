@@ -9,11 +9,9 @@ import {RequestStatusType} from './app-reducer';
 import {ErrorSnackbar} from '../components/ErrorSnackbar';
 
 
-
-
 function App() {
     console.log('App')
-const status = useSelector<AppRootStateType, RequestStatusType>(state=>state.app.status)
+    const status = useSelector<AppRootStateType, RequestStatusType>(state => state.app.status)
     return (
         <div className="App">
             <ErrorSnackbar/>
@@ -27,7 +25,7 @@ const status = useSelector<AppRootStateType, RequestStatusType>(state=>state.app
                     </Typography>
                     <Button color={'inherit'}>Login</Button>
                 </Toolbar>
-                {status === 'loading' && <LinearProgress color="secondary" />}
+                {status === 'loading' && <LinearProgress color="secondary"/>}
             </AppBar>
             <Container fixed>
                 <TodolistsList/>

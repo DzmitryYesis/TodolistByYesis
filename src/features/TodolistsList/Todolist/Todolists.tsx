@@ -79,7 +79,7 @@ export const Todolists = React.memo(({
                     <Delete/>
                 </IconButton>
             </h3>
-            <InputForAdd item={functionForAddTask}/>
+            <InputForAdd item={functionForAddTask} entityStatus={entityStatus}/>
             <div>
                 {
                     tasks.map(t => {

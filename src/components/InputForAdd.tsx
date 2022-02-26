@@ -1,12 +1,14 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
-import { IconButton, TextField} from '@material-ui/core';
+import {IconButton, TextField} from '@material-ui/core';
 import {AddBox} from '@material-ui/icons';
+import {RequestStatusType} from '../app/app-reducer';
 
 type InputForAddType = {
     item: (newTitle: string) => void
+    entityStatus?: RequestStatusType
 }
 
-const InputForAdd = React.memo(({item, ...props}: InputForAddType) => {
+const InputForAdd = React.memo(({item, entityStatus, ...props}: InputForAddType) => {
 
     console.log('AddInput')
 
@@ -48,8 +50,9 @@ const InputForAdd = React.memo(({item, ...props}: InputForAddType) => {
                 onKeyPress={addTaskOnKeyPressHandler}
                 label={'Title'}
                 helperText={error}
+                disabled={entityStatus === 'loading'}
             />
-            <IconButton color={'primary'} onClick={addTaskHandler}>
+            <IconButton color={'primary'} onClick={addTaskHandler} disabled={entityStatus === 'loading'}>
                 <AddBox/>
             </IconButton>
         </div>
