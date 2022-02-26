@@ -3,10 +3,12 @@ import SpanChangeTitle from '../../../../components/SpanChangeTitle';
 import {TaskStatuses, TaskType} from '../../../../api/todolist-api';
 import {Delete} from '@material-ui/icons';
 import {Checkbox, IconButton} from '@material-ui/core';
+import {RequestStatusType} from '../../../../app/app-reducer';
 
 type TaskComponentType = {
     todolistId: string
     task: TaskType
+    entityStatus: RequestStatusType
     removeTask: (todolistId: string, taskId: string) => void
     changeStatus: (todolistId: string, taskId: string, status: TaskStatuses) => void
     changeTaskTitle: (todolistId: string, taskId: string, newTitle: string) => void
@@ -15,6 +17,7 @@ type TaskComponentType = {
 const Task = React.memo(({
                              todolistId,
                              task,
+                             entityStatus,
                              removeTask,
                              changeStatus,
                              changeTaskTitle,
@@ -34,9 +37,11 @@ const Task = React.memo(({
             <Checkbox
                 checked={task.status === TaskStatuses.Completed}
                 onChange={changeStatusTasksHandler}
-                color={'primary'}/>
+                color={'primary'}
+                disabled={entityStatus === 'loading'}
+            />
             <SpanChangeTitle title={task.title} onChange={functionForChangeTaskTitle}/>
-            <IconButton onClick={removeTaskHandler}>
+            <IconButton onClick={removeTaskHandler} disabled={entityStatus === 'loading'}>
                 <Delete/>
             </IconButton>
         </div>)

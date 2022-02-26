@@ -1,5 +1,6 @@
 import {v1} from 'uuid';
 import {
+    addTodolistAC,
     changeTodolistFilterAC,
     changeTodolistTitleAC, FilterType,
     removeTodolistAC, TodolistDomainType,
@@ -31,14 +32,13 @@ test('correct todolist-reducer should be removed', () => {
     expect(endState[0].id).toBe(todolistId2);
 });
 
-// test('correct todolist-reducer should be added', () => {
-//     let newTodolistTitle = 'New todolist-reducer'
-//
-//     const endState = todolistReducer(startState, addTodolistAC(newTodolistTitle))
-//
-//     expect(endState.length).toBe(3);
-//     expect(endState[2].title).toBe('New todolist-reducer');
-// });
+test('correct todolist should be added', () => {
+
+    const endState = todolistReducer(startState, addTodolistAC({id: todolistId2, title: 'What to buy', addedDate: '', order: 2}))
+
+    expect(endState.length).toBe(3);
+    expect(endState[2].title).toBe('What to buy');
+});
 
 test('correct todolist-reducer should be changed filter', () => {
     let newFilter: FilterType = 'completed'

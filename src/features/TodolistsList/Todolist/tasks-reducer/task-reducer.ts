@@ -1,5 +1,5 @@
 import {
-    addTodolistAC, removeTodolistAC, setTodolistsAC
+    addTodolistAC, changeTodolistEntityStatusAC, removeTodolistAC, setTodolistsAC
 } from '../todolist-reducer/todolist-reducer';
 import {TaskStatuses, TaskType, todolistAPI, TodoTaskType} from '../../../../api/todolist-api';
 import {Dispatch} from 'redux';
@@ -85,17 +85,22 @@ export const setTasksTC = (todolistId: string) => (dispatch: Dispatch<TaskAction
 }
 export const removeTaskTC = (todolistId: string, taskId: string) => (dispatch: Dispatch<TaskActionType>) => {
     dispatch(setAppStatusAC('loading'))
+    dispatch(changeTodolistEntityStatusAC(todolistId, 'loading'))
     todolistAPI.deleteTask(todolistId, taskId)
         .then((res) => {
             if (res.data.resultCode === 0) {
                 dispatch(removeTaskAC(todolistId, taskId))
                 dispatch(setAppStatusAC('succeeded'))
+
             } else {
                 handleServerAppError(res.data, dispatch)
             }
         })
         .catch(error => {
             handleServerNetworkError(error, dispatch)
+        })
+        .finally(() => {
+            dispatch(changeTodolistEntityStatusAC(todolistId, 'idle'))
         })
 }
 export const addTaskTC = (todolistId: string, title: string) => (dispatch: Dispatch<TaskActionType>) => {
@@ -114,6 +119,7 @@ export const addTaskTC = (todolistId: string, title: string) => (dispatch: Dispa
         })
 }
 export const updateTaskStatusTC = (todolistId: string, taskId: string, status: TaskStatuses) => (dispatch: Dispatch<TaskActionType>, getState: () => AppRootStateType) => {
+    dispatch(changeTodolistEntityStatusAC(todolistId, 'loading'))
     dispatch(setAppStatusAC('loading'))
     const allTasks = getState().tasks
     const tasksFromCurrentTodolist = allTasks[todolistId]
@@ -139,6 +145,9 @@ export const updateTaskStatusTC = (todolistId: string, taskId: string, status: T
             })
             .catch(error => {
                 handleServerNetworkError(error, dispatch)
+            })
+            .finally(() => {
+                dispatch(changeTodolistEntityStatusAC(todolistId, 'idle'))
             })
     }
 }
@@ -184,3 +193,4 @@ export type TaskActionType =
     | ReturnType<typeof setTaskAC>
     | ReturnType<typeof setAppStatusAC>
     | ReturnType<typeof setErrorAC>
+    | ReturnType<typeof changeTodolistEntityStatusAC>
