@@ -8,6 +8,7 @@ import {useDispatch} from 'react-redux';
 import {setTasksTC} from './tasks-reducer/task-reducer';
 import {Button, ButtonGroup, IconButton} from '@material-ui/core';
 import {Delete} from '@material-ui/icons';
+import {RequestStatusType} from '../../../app/app-reducer';
 
 
 type TodolistType = {
@@ -16,6 +17,7 @@ type TodolistType = {
     todolistTitle: string
     tasks: Array<TaskType>
     filter: FilterType
+    entityStatus: RequestStatusType
     removeTask: (todolistId: string, taskId: string) => void
     changeFilter: (todolistId: string, value: FilterType) => void
     addTask: (todolistId: string, newTitle: string) => void
@@ -31,6 +33,7 @@ export const Todolists = React.memo(({
                                          todolistTitle,
                                          tasks,
                                          filter,
+                                         entityStatus,
                                          removeTask,
                                          changeFilter,
                                          addTask,
@@ -72,7 +75,7 @@ export const Todolists = React.memo(({
         <div>
             <h3>
                 <SpanChangeTitle title={todolistTitle} onChange={functionForChangeTodolistTitle}/>
-                <IconButton onClick={removeTodolistHandler}>
+                <IconButton onClick={removeTodolistHandler} disabled={entityStatus === 'loading'}>
                     <Delete/>
                 </IconButton>
             </h3>
