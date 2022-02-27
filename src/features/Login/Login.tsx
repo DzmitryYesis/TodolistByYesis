@@ -8,8 +8,14 @@ import FormLabel from '@mui/material/FormLabel';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import {useFormik} from 'formik';
+import {useDispatch, useSelector} from 'react-redux';
+import {loginTC} from './Login/auth-reducer';
+import {AppRootStateType} from '../../app/store';
 
 export const Login = () => {
+
+    const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn)
+    const dispatch = useDispatch()
 
     const formik = useFormik({
         initialValues: {
@@ -32,8 +38,7 @@ export const Login = () => {
             return errors;
         },
         onSubmit: ((value) => {
-            alert(JSON.stringify(value))
-            formik.resetForm()
+            dispatch(loginTC(value))
         })
     })
 
