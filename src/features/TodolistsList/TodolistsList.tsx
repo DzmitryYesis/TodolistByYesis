@@ -15,15 +15,20 @@ import {TaskStatuses, TodoTaskType} from '../../api/todolist-api';
 import {Grid, Paper} from '@material-ui/core';
 import InputForAdd from '../../components/InputForAdd';
 import Todolists from './Todolist/Todolists';
+import {Navigate} from 'react-router-dom';
 
 export const TodolistsList: React.FC = () => {
     const dispatch = useDispatch()
     const todolists = useSelector<AppRootStateType, Array<TodolistDomainType>>(state => state.todolists)
     const tasks = useSelector<AppRootStateType, TodoTaskType>(state => state.tasks)
+    const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn)
 
     // Tasks function
 
     useEffect(() => {
+        if (!isLoggedIn) {
+            return
+        }
         dispatch(setTodolistsTC())
     }, [])
 
@@ -54,6 +59,11 @@ export const TodolistsList: React.FC = () => {
     const changeTodolistTitle = useCallback((todolistId: string, newTitle: string) => {
         dispatch(changeTodolistTitleTC(todolistId, newTitle))
     }, [dispatch])
+
+    if (!isLoggedIn) {
+        return <Navigate to={'/login'}/>
+    }
+
     return <>
         <Grid container style={{padding: '20px'}}>
             <InputForAdd item={addTodolist}/>

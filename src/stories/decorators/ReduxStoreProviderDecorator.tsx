@@ -75,7 +75,8 @@ const initialGlobalState:AppRootStateType = {
     error: null
   },
   auth:{
-    isLoggedIn: false
+    isLoggedIn: false,
+    isInitialized: false
   }
 };
 
