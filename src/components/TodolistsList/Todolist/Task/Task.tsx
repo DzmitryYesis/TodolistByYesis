@@ -1,6 +1,6 @@
 import React, {ChangeEvent, useCallback} from 'react';
-import SpanChangeTitle from '../../../../components/SpanChangeTitle';
-import {TaskStatuses, TaskType} from '../../../../api/todolist-api';
+import SpanChangeTitle from 'src/components/SpanChangeTitle';
+import {TaskStatuses, TaskType} from 'src/api/todolist-api';
 import {Delete} from '@material-ui/icons';
 import {Checkbox, IconButton} from '@material-ui/core';
 import {RequestStatusType} from 'src/store/reducers/app-reducer';

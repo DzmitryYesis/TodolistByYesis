@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import 'src/App.cssss'
 import {AppBar, Button, Container, IconButton, LinearProgress, Toolbar, Typography} from '@material-ui/core';
 import {Menu} from '@material-ui/icons';
-import {TodolistsList} from 'src/features/TodolistsList/TodolistsList';
+import {TodolistsList} from 'src/components/TodolistsList/TodolistsList';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppRootStateType} from 'src/store/store';
 import {RequestStatusType} from 'src/store/reducers/app-reducer';

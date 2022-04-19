@@ -11,10 +11,10 @@ import {
     TodolistDomainType
 } from 'src/store/reducers/todolist-reducer';
 import {addTaskTC, changeTaskTitleTC, removeTaskTC, updateTaskStatusTC} from 'src/store/reducers/task-reducer';
-import {TaskStatuses, TodoTaskType} from '../../api/todolist-api';
+import {TaskStatuses, TodoTaskType} from 'src/api/todolist-api';
 import {Grid, Paper} from '@material-ui/core';
-import InputForAdd from '../../components/InputForAdd';
-import Todolists from './Todolist/Todolists';
+import InputForAdd from 'src/components/InputForAdd';
+import Todolists from 'src/components/TodolistsList/Todolist/Todolists';
 import {Navigate} from 'react-router-dom';
 
 export const TodolistsList: React.FC = () => {
