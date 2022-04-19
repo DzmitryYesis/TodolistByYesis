@@ -1,15 +1,15 @@
 import React, {useEffect} from 'react';
-import 'src/App.cssss'
+import './App.css'
 import {AppBar, Button, Container, IconButton, LinearProgress, Toolbar, Typography} from '@material-ui/core';
 import {Menu} from '@material-ui/icons';
-import {TodolistsList} from 'src/components/TodolistsList/TodolistsList';
+import {TodolistsList} from './components/TodolistsList/TodolistsList';
 import {useDispatch, useSelector} from 'react-redux';
-import {AppRootStateType} from 'src/store/store';
-import {RequestStatusType} from 'src/store/reducers/app-reducer';
-import {ErrorSnackbar} from 'src/components/ErrorSnackbar';
+import {AppRootStateType} from './store/store';
+import {RequestStatusType} from './store/reducers/app-reducer';
+import {ErrorSnackbar} from './components/ErrorSnackbar';
 import {Routes, Route, Navigate} from 'react-router-dom'
-import {Login} from 'src/components/Login/Login';
-import {initializeAppTC, logoutTC} from 'src/store/reducers/auth-reducer';
+import {Login} from './components/Login/Login';
+import {initializeAppTC, logoutTC} from './store/reducers/auth-reducer';
 import {CircularProgress} from '@mui/material';
 
 

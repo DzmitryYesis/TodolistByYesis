@@ -1,7 +1,7 @@
 import {Dispatch} from 'redux'
-import {setAppStatusAC, setErrorAC} from 'src/store/reducers/app-reducer';
-import {authAPI} from 'src/api/auth-api';
-import {handleServerAppError, handleServerNetworkError} from 'src/utils/error-utils';
+import {setAppStatusAC, setErrorAC} from './app-reducer';
+import {authAPI} from './../../api/auth-api';
+import {handleServerAppError, handleServerNetworkError} from './../../utils/error-utils';
 
 const initialState = {
     isLoggedIn: false,

@@ -1,11 +1,11 @@
 import {
     addTodolistAC, changeTodolistEntityStatusAC, removeTodolistAC, setTodolistsAC
-} from 'src/store/reducers/todolist-reducer';
-import {TaskStatuses, TaskType, todolistAPI, TodoTaskType} from 'src/api/todolist-api';
+} from './todolist-reducer';
+import {TaskStatuses, TaskType, todolistAPI, TodoTaskType} from './../../api/todolist-api';
 import {Dispatch} from 'redux';
-import {AppRootStateType} from 'src/store/store';
-import {setAppStatusAC, setErrorAC} from 'src/store/reducers/app-reducer';
-import {handleServerAppError, handleServerNetworkError} from 'src/utils/error-utils';
+import {AppRootStateType} from './../store';
+import {setAppStatusAC, setErrorAC} from './app-reducer';
+import {handleServerAppError, handleServerNetworkError} from './../../utils/error-utils';
 
 const initialState: TodoTaskType = {}
 

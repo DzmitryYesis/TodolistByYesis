@@ -1,12 +1,12 @@
 import {Provider} from 'react-redux';
 import {combineReducers, createStore} from 'redux';
-import {tasksReducer} from 'src/store/reducers/task-reducer';
-import {todolistReducer} from 'src/store/reducers/todolist-reducer';
+import {tasksReducer} from './../../store/reducers/task-reducer';
+import {todolistReducer} from './../../store/reducers/todolist-reducer';
 import {v1} from 'uuid';
-import {AppRootStateType} from 'src/store/store';
+import {AppRootStateType} from './../../store/store';
 import {TaskPriorities, TaskStatuses} from '../../api/todolist-api';
-import {appReducer} from 'src/store/reducers/app-reducer';
-import {authReducer} from 'src/store/reducers/auth-reducer';
+import {appReducer} from './../../store/reducers/app-reducer';
+import {authReducer} from './../../store/reducers/auth-reducer';
 
 const rootReducer = combineReducers({
   tasks: tasksReducer,

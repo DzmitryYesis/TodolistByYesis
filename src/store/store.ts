@@ -1,9 +1,11 @@
 import {applyMiddleware, combineReducers, createStore} from 'redux';
-import {tasksReducer} from 'src/store/reducers/task-reducer';
-import {todolistReducer} from 'src/store/reducers/todolist-reducer';
+import {tasksReducer} from './reducers/task-reducer';
+import {todolistReducer} from './reducers/todolist-reducer';
 import thunk from 'redux-thunk';
-import {appReducer} from 'src/store/reducers/app-reducer';
-import {authReducer} from 'src/store/reducers/auth-reducer';
+import {appReducer} from './reducers/app-reducer';
+import {authReducer} from './reducers/auth-reducer';
+
+
 // объединяя reducer-ы с помощью combineReducers,
 // мы задаём структуру нашего единственного объекта-состояния
 const rootReducer = combineReducers({

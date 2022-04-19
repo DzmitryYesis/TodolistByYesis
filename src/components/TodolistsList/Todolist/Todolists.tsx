@@ -1,14 +1,14 @@
 import React, {useCallback, useEffect} from 'react';
-import InputForAdd from 'src/components/InputForAdd';
-import SpanChangeTitle from 'src/components/SpanChangeTitle';
-import Task from 'src/components/TodolistsList/Todolist/Task/Task';
-import {TaskStatuses, TaskType} from 'src/api/todolist-api';
-import {FilterType} from 'src/store/reducers/todolist-reducer';
+import InputForAdd from './../../InputForAdd';
+import SpanChangeTitle from './../../SpanChangeTitle';
+import Task from './Task/Task';
+import {TaskStatuses, TaskType} from './../../../api/todolist-api';
+import {FilterType} from './../../../store/reducers/todolist-reducer';
 import {useDispatch} from 'react-redux';
-import {setTasksTC} from 'src/store/reducers/task-reducer';
+import {setTasksTC} from './../../../store/reducers/task-reducer';
 import {Button, ButtonGroup, IconButton} from '@material-ui/core';
 import {Delete} from '@material-ui/icons';
-import {RequestStatusType} from 'src/store/reducers/app-reducer';
+import {RequestStatusType} from './../../../store/reducers/app-reducer';
 
 
 type TodolistType = {
