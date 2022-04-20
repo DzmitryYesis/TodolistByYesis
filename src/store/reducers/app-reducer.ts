@@ -1,7 +1,8 @@
 import { RequestStatus } from 'enum';
+import { RequestStatusType } from 'types';
 
 const initialState = {
-  status: RequestStatus.LOADING as RequestStatusType,
+  status: RequestStatus.LOADING,
   error: null as null | string,
 };
 
@@ -26,10 +27,6 @@ export const setErrorAC = (error: null | string) =>
   ({ type: 'APP/SET-ERROR', error } as const);
 
 // types
-export type RequestStatusType =
-  | RequestStatus.IDLE
-  | RequestStatus.LOADING
-  | RequestStatus.SUCCEEDED
-  | RequestStatus.FAILED;
+
 export type InitialStateType = typeof initialState;
 type AppActionType = ReturnType<typeof setAppStatusAC> | ReturnType<typeof setErrorAC>;
