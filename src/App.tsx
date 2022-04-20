@@ -18,24 +18,25 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import { ErrorSnackbar } from './components/ErrorSnackbar';
 import { Login } from './components/Login/Login';
 import { TodolistsList } from './components/TodolistsList/TodolistsList';
-import { RequestStatusType } from './store/reducers/app-reducer';
 import { initializeAppTC, logoutTC } from './store/reducers/auth-reducer';
-import { AppRootStateType } from './store/store';
 
+import { selectStatus } from 'store/selectors/selectApp';
 import { selectIsInitialized, selectIsLoggedIn } from 'store/selectors/selectAuth';
 
 export const App = (): ReactElement => {
   const dispatch = useDispatch();
 
-  const status = useSelector<AppRootStateType, RequestStatusType>(
-    state => state.app.status,
-  );
+  const status = useSelector(selectStatus);
   const isInitialized = useSelector(selectIsInitialized);
   const isLoggedIn = useSelector(selectIsLoggedIn);
 
   useEffect(() => {
     dispatch(initializeAppTC());
   }, []);
+
+  const logoutHandler = (): void => {
+    dispatch(logoutTC());
+  };
 
   if (!isInitialized) {
     return (
@@ -44,10 +45,6 @@ export const App = (): ReactElement => {
       </div>
     );
   }
-
-  const logoutHandler = (): void => {
-    dispatch(logoutTC());
-  };
 
   return (
     <div className="App">
