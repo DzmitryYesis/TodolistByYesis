@@ -1,4 +1,5 @@
 import { RequestStatus } from 'enum';
+import { AllAppActionType } from 'store/actions';
 
 type InitialStateType = typeof initialState;
 
@@ -9,19 +10,14 @@ const initialState = {
 
 export const appReducer = (
   state: InitialStateType = initialState,
-  action: AppActionType,
+  action: AllAppActionType,
 ): InitialStateType => {
   switch (action.type) {
     case 'APP/SET-STATUS':
-      return { ...state, status: action.status };
+      return { ...state, status: action.payload.status };
     case 'APP/SET-ERROR':
-      return { ...state, error: action.error };
+      return { ...state, error: action.payload.error };
     default:
       return state;
   }
 };
-
-// types
-
-
-type AppActionType = ReturnType<typeof setAppStatusAC> | ReturnType<typeof setErrorAC>;
