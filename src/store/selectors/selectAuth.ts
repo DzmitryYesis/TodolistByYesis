@@ -1,4 +1,4 @@
-import { AppRootStateType } from 'store/store';
+import { AppRootStateType } from 'store';
 
 export const selectIsInitialized = (state: AppRootStateType): boolean =>
   state.auth.isInitialized;
