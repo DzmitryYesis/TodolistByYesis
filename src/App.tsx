@@ -22,18 +22,16 @@ import { RequestStatusType } from './store/reducers/app-reducer';
 import { initializeAppTC, logoutTC } from './store/reducers/auth-reducer';
 import { AppRootStateType } from './store/store';
 
+import { selectIsInitialized, selectIsLoggedIn } from 'store/selectors/selectAuth';
+
 export const App = (): ReactElement => {
   const dispatch = useDispatch();
 
   const status = useSelector<AppRootStateType, RequestStatusType>(
     state => state.app.status,
   );
-  const isInitialized = useSelector<AppRootStateType, boolean>(
-    state => state.auth.isInitialized,
-  );
-  const isLoggedIn = useSelector<AppRootStateType, boolean>(
-    state => state.auth.isLoggedIn,
-  );
+  const isInitialized = useSelector(selectIsInitialized);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
 
   useEffect(() => {
     dispatch(initializeAppTC());
