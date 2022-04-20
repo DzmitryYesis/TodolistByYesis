@@ -1,5 +1,5 @@
-export type { AllAppActionType } from './allAppActionType';
+export type { AllAppActionType } from './AllAppActionType';
 
-export type { AppActionType } from './appActionType';
+export type { AppActionType } from './AppActionType';
 
-export type { AuthActionType } from './authActionType';
+export type { AuthActionType } from './AuthActionType';
