@@ -25,8 +25,6 @@ export const authReducer = (
       return state;
   }
 };
-// actions
-
 
 // thunks
 export const loginTC = (data: any) => (dispatch: Dispatch<ActionsType>) => {
@@ -80,11 +78,3 @@ export const logoutTC = () => (dispatch: Dispatch<ActionsType>) => {
       handleServerNetworkError(error, dispatch);
     });
 };
-
-// types
-type ActionsType =
-  | ReturnType<typeof setIsLoggedInAC>
-  | ReturnType<typeof setAppStatusAC>
-  | ReturnType<typeof setErrorAC>
-  | ReturnType<typeof setAppStatusAC>
-  | ReturnType<typeof setIsInitializedAC>;

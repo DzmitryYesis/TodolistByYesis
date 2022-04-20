@@ -1,3 +1,3 @@
-import { AppActionType } from 'store/actions';
+import { AppActionType, AuthActionType } from 'store/actions';
 
-export type AllAppActionType = AppActionType;
+export type AllAppActionType = AppActionType | AuthActionType;
