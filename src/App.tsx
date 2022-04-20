@@ -20,8 +20,7 @@ import { Login } from './components/Login/Login';
 import { TodolistsList } from './components/TodolistsList/TodolistsList';
 import { initializeAppTC, logoutTC } from './store/reducers/auth-reducer';
 
-import { selectStatus } from 'store/selectors/selectApp';
-import { selectIsInitialized, selectIsLoggedIn } from 'store/selectors/selectAuth';
+import { selectStatus, selectIsInitialized, selectIsLoggedIn } from 'store/selectors';
 
 export const App = (): ReactElement => {
   const dispatch = useDispatch();
