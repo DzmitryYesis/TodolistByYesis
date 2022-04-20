@@ -13,15 +13,15 @@ import {
 import { Menu } from '@material-ui/icons';
 import { CircularProgress } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 
 import { ErrorSnackbar } from './components/ErrorSnackbar';
 import { Login } from './components/Login/Login';
 import { TodolistsList } from './components/TodolistsList/TodolistsList';
 import { initializeAppTC, logoutTC } from './store/reducers/auth-reducer';
 
-import { PATH } from 'enum';
-import { selectStatus, selectIsInitialized, selectIsLoggedIn } from 'store/selectors';
+import { PATH, RequestStatus } from 'enum';
+import { selectIsInitialized, selectIsLoggedIn, selectStatus } from 'store/selectors';
 
 export const App = (): ReactElement => {
   const dispatch = useDispatch();
@@ -61,7 +61,7 @@ export const App = (): ReactElement => {
             </Button>
           )}
         </Toolbar>
-        {status === 'loading' && <LinearProgress color="secondary" />}
+        {status === RequestStatus.LOADING && <LinearProgress color="secondary" />}
       </AppBar>
       <Container fixed>
         <Routes>
