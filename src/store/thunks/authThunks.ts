@@ -1,7 +1,7 @@
 import { Dispatch } from 'redux';
 
 import { authAPI } from 'api/auth-api';
-import { RequestStatus } from 'enum';
+import { RequestStatus, ResultCode } from 'enum';
 import {
   AllAppActionType,
   setAppStatusAC,
@@ -15,7 +15,7 @@ export const loginTC = (data: any) => (dispatch: Dispatch<AllAppActionType>) => 
   authAPI
     .login(data)
     .then(res => {
-      if (res.data.resultCode === 0) {
+      if (res.data.resultCode === ResultCode.Success) {
         dispatch(setIsLoggedInAC(true));
         dispatch(setAppStatusAC(RequestStatus.SUCCEEDED));
       } else {
@@ -30,7 +30,7 @@ export const initializeAppTC = () => (dispatch: Dispatch) => {
   authAPI
     .me()
     .then(res => {
-      if (res.data.resultCode === 0) {
+      if (res.data.resultCode === ResultCode.Success) {
         dispatch(setIsLoggedInAC(true));
         dispatch(setAppStatusAC(RequestStatus.SUCCEEDED));
       } else {
@@ -50,7 +50,7 @@ export const logoutTC = () => (dispatch: Dispatch<AllAppActionType>) => {
   authAPI
     .logout()
     .then(res => {
-      if (res.data.resultCode === 0) {
+      if (res.data.resultCode === ResultCode.Success) {
         dispatch(setIsLoggedInAC(false));
         dispatch(setAppStatusAC(RequestStatus.SUCCEEDED));
       } else {
