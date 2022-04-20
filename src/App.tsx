@@ -20,6 +20,7 @@ import { Login } from './components/Login/Login';
 import { TodolistsList } from './components/TodolistsList/TodolistsList';
 import { initializeAppTC, logoutTC } from './store/reducers/auth-reducer';
 
+import { PATH } from 'enum';
 import { selectStatus, selectIsInitialized, selectIsLoggedIn } from 'store/selectors';
 
 export const App = (): ReactElement => {
@@ -64,10 +65,10 @@ export const App = (): ReactElement => {
       </AppBar>
       <Container fixed>
         <Routes>
-          <Route path="/" element={<TodolistsList />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/404" element={<h1>404:PAGE NOT FOUND</h1>} />
-          <Route path="*" element={<Navigate to="/404" />} />
+          <Route path={PATH.TODOLIST_LIST} element={<TodolistsList />} />
+          <Route path={PATH.LOGIN} element={<Login />} />
+          <Route path={PATH.PAGE404} element={<h1>404:PAGE NOT FOUND</h1>} />
+          <Route path={PATH.UNKNOWN} element={<Navigate to={PATH.PAGE404} />} />
         </Routes>
       </Container>
     </div>
