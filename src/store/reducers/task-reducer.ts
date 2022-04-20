@@ -1,6 +1,6 @@
 import {
     addTodolistAC, changeTodolistEntityStatusAC, removeTodolistAC, setTodolistsAC
-} from './todolist-reducer';
+} from 'store/reducers/todolists-reducer';
 import {TaskStatuses, TaskType, todolistAPI, TodoTaskType} from './../../api/todolist-api';
 import {Dispatch} from 'redux';
 import {AppRootStateType} from './../store';

@@ -4,8 +4,8 @@ import {
     changeTodolistFilterAC,
     changeTodolistTitleAC, FilterType,
     removeTodolistAC, TodolistDomainType,
-    todolistReducer
-} from './../todolist-reducer';
+    todolistsReducer
+} from 'store/reducers/todolists-reducer';
 
 let todolistId1: string;
 let todolistId2: string;
@@ -26,7 +26,7 @@ beforeEach(() => {
 test('correct todolist-reducer should be removed', () => {
 
 
-    const endState = todolistReducer(startState, removeTodolistAC(todolistId1))
+    const endState = todolistsReducer(startState, removeTodolistAC(todolistId1))
 
     expect(endState.length).toBe(1);
     expect(endState[0].id).toBe(todolistId2);
@@ -34,7 +34,7 @@ test('correct todolist-reducer should be removed', () => {
 
 test('correct todolist should be added', () => {
 
-    const endState = todolistReducer(startState, addTodolistAC({id: todolistId2, title: 'What to buy', addedDate: '', order: 2}))
+    const endState = todolistsReducer(startState, addTodolistAC({id: todolistId2, title: 'What to buy', addedDate: '', order: 2}))
 
     expect(endState.length).toBe(3);
     expect(endState[2].title).toBe('What to buy');
@@ -43,7 +43,7 @@ test('correct todolist should be added', () => {
 test('correct todolist-reducer should be changed filter', () => {
     let newFilter: FilterType = 'completed'
 
-    const endState = todolistReducer(startState, changeTodolistFilterAC(todolistId2, newFilter))
+    const endState = todolistsReducer(startState, changeTodolistFilterAC(todolistId2, newFilter))
 
     expect(endState.length).toBe(2);
     expect(endState[1].filter).toBe('completed');
@@ -53,7 +53,7 @@ test('correct todolist-reducer should be changed filter', () => {
 test('correct todolist-reducer should be changed title', () => {
     let newTitle = 'New Todolist Title'
 
-    const endState = todolistReducer(startState, changeTodolistTitleAC(todolistId2, newTitle))
+    const endState = todolistsReducer(startState, changeTodolistTitleAC(todolistId2, newTitle))
 
     expect(endState.length).toBe(2);
     expect(endState[1].title).toBe('New Todolist Title');

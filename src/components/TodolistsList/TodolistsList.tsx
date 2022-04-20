@@ -9,7 +9,7 @@ import {
     removeTodolistTC,
     setTodolistsTC,
     TodolistDomainType
-} from './../../store/reducers/todolist-reducer';
+} from 'store/reducers/todolists-reducer';
 import {addTaskTC, changeTaskTitleTC, removeTaskTC, updateTaskStatusTC} from './../../store/reducers/task-reducer';
 import {TaskStatuses, TodoTaskType} from './../../api/todolist-api';
 import {Grid, Paper} from '@material-ui/core';

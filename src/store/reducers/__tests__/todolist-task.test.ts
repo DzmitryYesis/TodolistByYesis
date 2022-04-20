@@ -1,5 +1,5 @@
 
-import {addTodolistAC, TodolistDomainType, todolistReducer} from 'src/store/reducers/todolist-reducer';
+import {addTodolistAC, TodolistDomainType, todolistReducer} from 'store/reducers/todolists-reducer';
 import {tasksReducer} from 'src/store/reducers/task-reducer';
 import {TodoTaskType} from 'src/api/todolist-api';
 
