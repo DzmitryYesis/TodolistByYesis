@@ -10,6 +10,7 @@ export const setAppStatusAC = (status: RequestStatusType) =>
       status,
     },
   } as const);
+
 export const setErrorAC = (error: null | string) =>
   ({
     type: SET_ERROR,
