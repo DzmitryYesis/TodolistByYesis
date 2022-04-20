@@ -1,5 +1,6 @@
 import { RequestStatus } from 'enum';
-import { RequestStatusType } from 'types';
+
+type InitialStateType = typeof initialState;
 
 const initialState = {
   status: RequestStatus.LOADING,
@@ -20,13 +21,7 @@ export const appReducer = (
   }
 };
 
-// actions
-export const setAppStatusAC = (status: RequestStatusType) =>
-  ({ type: 'APP/SET-STATUS', status } as const);
-export const setErrorAC = (error: null | string) =>
-  ({ type: 'APP/SET-ERROR', error } as const);
-
 // types
 
-export type InitialStateType = typeof initialState;
+
 type AppActionType = ReturnType<typeof setAppStatusAC> | ReturnType<typeof setErrorAC>;
