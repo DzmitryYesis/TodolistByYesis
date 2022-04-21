@@ -20,4 +20,9 @@ export {
   addTaskAC,
 } from './tasksActions';
 
-export type { AllAppActionType, AppActionType, AuthActionType } from './types';
+export type {
+  AllAppActionType,
+  AppActionType,
+  AuthActionType,
+  TasksActionType,
+} from './types';
