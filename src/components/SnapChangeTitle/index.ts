@@ -1,0 +1,1 @@
+export { SpanChangeTitle } from './SpanChangeTitle';

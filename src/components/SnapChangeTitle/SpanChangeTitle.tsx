@@ -1,32 +1,36 @@
-import React, {ChangeEvent, useState} from 'react';
-import {TextField} from '@material-ui/core';
+import React, { ChangeEvent, useState } from 'react';
 
-type SpanChangeTitleType = {
-    title: string
-    onChange: (newTitle: string) => void
-}
+import { TextField } from '@material-ui/core';
 
-const SpanChangeTitle = React.memo(({title, onChange, ...props}: SpanChangeTitleType) => {
+type SpanChangeTitlePropsType = {
+  title: string;
+  onChange: (newTitle: string) => void;
+};
 
-    const [editMode, setEditMode] = useState<boolean>(true)
-    const [newtitle, setNewTitle] = useState(title)
+export const SpanChangeTitle = React.memo(
+  ({ title, onChange }: SpanChangeTitlePropsType) => {
+    const [editMode, setEditMode] = useState<boolean>(true);
+    const [newTitle, setNewTitle] = useState(title);
 
-    const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        setNewTitle(e.currentTarget.value)
-    }
+    const onChangeHandler = (e: ChangeEvent<HTMLInputElement>): void => {
+      setNewTitle(e.currentTarget.value);
+    };
 
-    const addNewTitle = () => {
-        onChange(newtitle)
-        setEditMode(!editMode)
-    }
+    const addNewTitle = (): void => {
+      onChange(newTitle);
+      setEditMode(!editMode);
+    };
 
-    return (
-        editMode
-            ? <span onDoubleClick={() => setEditMode(!editMode)}>{newtitle}</span>
-            :
-            <TextField variant={'outlined'} value={newtitle} onChange={onChangeHandler} onBlur={addNewTitle} autoFocus/>
-
+    return editMode ? (
+      <span onDoubleClick={() => setEditMode(!editMode)}>{newTitle}</span>
+    ) : (
+      <TextField
+        variant="outlined"
+        value={newTitle}
+        onChange={onChangeHandler}
+        onBlur={addNewTitle}
+        autoFocus
+      />
     );
-});
-
-export default SpanChangeTitle;
+  },
+);
