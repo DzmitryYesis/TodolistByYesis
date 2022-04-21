@@ -5,7 +5,7 @@ import {
   changeTodolistTitleAC,
   removeTodolistAC,
   setTodolistsAC,
-} from 'store/actions/todolistsActions';
+} from 'store/actions';
 
 export type TodolistActionType =
   | ReturnType<typeof addTodolistAC>

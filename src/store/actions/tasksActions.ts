@@ -1,4 +1,5 @@
-import { TaskStatuses, TaskType } from 'api/todolist-api';
+import { TaskStatuses } from 'enum';
+import { TaskType } from 'types';
 
 export const REMOVE_TASK = 'TASK/REMOVE-TASK';
 export const ADD_TASK = 'TASK/ADD-TASK';

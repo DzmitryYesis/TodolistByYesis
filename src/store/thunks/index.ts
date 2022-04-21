@@ -7,3 +7,10 @@ export {
   updateTaskStatusTC,
   removeTaskTC,
 } from './tasksThunks';
+
+export {
+  removeTodolistTC,
+  changeTodolistTitleTC,
+  setTodolistsTC,
+  addTodolistTC,
+} from './todolistThunks';

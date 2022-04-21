@@ -1,5 +1,4 @@
-import { FilterType } from 'store/reducers/todolists-reducer';
-import { RequestStatusType } from 'types';
+import { RequestStatusType, FilterType } from 'types';
 
 export type TodolistType = {
   id: string;

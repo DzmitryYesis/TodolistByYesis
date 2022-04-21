@@ -1,6 +1,6 @@
 import { Dispatch } from 'redux';
 
-import { authAPI } from 'api/auth-api';
+import { authAPI } from 'api';
 import { RequestStatus, ResultCode } from 'enum';
 import {
   AllAppActionType,
@@ -8,7 +8,7 @@ import {
   setIsInitializedAC,
   setIsLoggedInAC,
 } from 'store/actions';
-import { handleServerAppError, handleServerNetworkError } from 'utils/error-utils';
+import { handleServerAppError, handleServerNetworkError } from 'utils';
 
 export const loginTC = (data: any) => (dispatch: Dispatch<AllAppActionType>) => {
   dispatch(setAppStatusAC(RequestStatus.LOADING));
