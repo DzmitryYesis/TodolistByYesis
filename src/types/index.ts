@@ -7,3 +7,5 @@ export type { TodolistType, TodolistDomainType } from './TodolistType';
 export type { TaskType, TodoTaskType, GetTaskType, UpdateTaskType } from './TaskType';
 
 export type { FilterType } from './FilterType';
+
+export type { ErrorUtilsDispatchType } from './ErrorUtilsDispatchType';
