@@ -1,22 +1,22 @@
 import { Dispatch } from 'redux';
 
-import { TaskStatuses, todolistAPI } from 'api/todolist-api';
-import { RequestStatus, ResultCode } from 'enum';
+import { todolistAPI } from 'api';
+import { RequestStatus, ResultCode, TaskStatuses } from 'enum';
 import { AppRootStateType } from 'store';
 import {
   addTaskAC,
+  AllAppActionType,
   changeTaskStatusAC,
   changeTaskTitleAC,
+  changeTodolistEntityStatusAC,
   removeTaskAC,
   setAppStatusAC,
   setTasksAC,
 } from 'store/actions';
-import { TaskActionType } from 'store/reducers/task-reducer';
-import { changeTodolistEntityStatusAC } from 'store/reducers/todolists-reducer';
-import { handleServerAppError, handleServerNetworkError } from 'utils/error-utils';
+import { handleServerAppError, handleServerNetworkError } from 'utils';
 
 export const setTasksTC =
-  (todolistId: string) => (dispatch: Dispatch<TaskActionType>) => {
+  (todolistId: string) => (dispatch: Dispatch<AllAppActionType>) => {
     dispatch(setAppStatusAC(RequestStatus.LOADING));
     todolistAPI
       .getTasks(todolistId)
@@ -30,13 +30,13 @@ export const setTasksTC =
   };
 
 export const removeTaskTC =
-  (todolistId: string, taskId: string) => (dispatch: Dispatch<TaskActionType>) => {
+  (todolistId: string, taskId: string) => (dispatch: Dispatch<AllAppActionType>) => {
     dispatch(setAppStatusAC(RequestStatus.LOADING));
-    dispatch(changeTodolistEntityStatusAC(todolistId, 'loading'));
+    dispatch(changeTodolistEntityStatusAC(todolistId, RequestStatus.LOADING));
     todolistAPI
       .deleteTask(todolistId, taskId)
       .then(res => {
-        if (res.data.resultCode === ResultCode.Success) {
+        if (res.status === ResultCode.Success) {
           dispatch(removeTaskAC(todolistId, taskId));
           dispatch(setAppStatusAC(RequestStatus.SUCCEEDED));
         } else {
@@ -47,12 +47,12 @@ export const removeTaskTC =
         handleServerNetworkError(error, dispatch);
       })
       .finally(() => {
-        dispatch(changeTodolistEntityStatusAC(todolistId, 'idle'));
+        dispatch(changeTodolistEntityStatusAC(todolistId, RequestStatus.IDLE));
       });
   };
 
 export const addTaskTC =
-  (todolistId: string, title: string) => (dispatch: Dispatch<TaskActionType>) => {
+  (todolistId: string, title: string) => (dispatch: Dispatch<AllAppActionType>) => {
     dispatch(setAppStatusAC(RequestStatus.LOADING));
     todolistAPI
       .createTask(todolistId, title)
@@ -71,8 +71,8 @@ export const addTaskTC =
 
 export const updateTaskStatusTC =
   (todolistId: string, taskId: string, status: TaskStatuses) =>
-  (dispatch: Dispatch<TaskActionType>, getState: () => AppRootStateType) => {
-    dispatch(changeTodolistEntityStatusAC(todolistId, 'loading'));
+  (dispatch: Dispatch<AllAppActionType>, getState: () => AppRootStateType) => {
+    dispatch(changeTodolistEntityStatusAC(todolistId, RequestStatus.LOADING));
     dispatch(setAppStatusAC(RequestStatus.LOADING));
     const allTasks = getState().tasks;
     const tasksFromCurrentTodolist = allTasks[todolistId];
@@ -99,14 +99,14 @@ export const updateTaskStatusTC =
           handleServerNetworkError(error, dispatch);
         })
         .finally(() => {
-          dispatch(changeTodolistEntityStatusAC(todolistId, 'idle'));
+          dispatch(changeTodolistEntityStatusAC(todolistId, RequestStatus.IDLE));
         });
     }
   };
 
 export const changeTaskTitleTC =
   (todolistId: string, taskId: string, title: string) =>
-  (dispatch: Dispatch<TaskActionType>, getState: () => AppRootStateType) => {
+  (dispatch: Dispatch<AllAppActionType>, getState: () => AppRootStateType) => {
     dispatch(setAppStatusAC(RequestStatus.LOADING));
     const allTasks = getState().tasks;
     const tasksFromCurrentTodolist = allTasks[todolistId];
