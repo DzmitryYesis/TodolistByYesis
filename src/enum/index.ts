@@ -7,3 +7,5 @@ export { ResultCode } from './ResultCode';
 export { TaskStatuses } from './TaskStatuses';
 
 export { TaskPriorities } from './TaskPriorities';
+
+export { Filter } from './Filter';
