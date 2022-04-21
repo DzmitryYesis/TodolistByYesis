@@ -1,3 +1,12 @@
-import { AppActionType, AuthActionType, TasksActionType } from 'store/actions';
+import {
+  AppActionType,
+  AuthActionType,
+  TasksActionType,
+  TodolistActionType,
+} from 'store/actions';
 
-export type AllAppActionType = AppActionType | AuthActionType | TasksActionType;
+export type AllAppActionType =
+  | AppActionType
+  | AuthActionType
+  | TasksActionType
+  | TodolistActionType;

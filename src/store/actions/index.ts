@@ -25,4 +25,5 @@ export type {
   AppActionType,
   AuthActionType,
   TasksActionType,
+  TodolistActionType,
 } from './types';
