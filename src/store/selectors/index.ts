@@ -1,3 +1,3 @@
 export { selectIsLoggedIn, selectIsInitialized } from './selectAuth';
 
-export { selectStatus } from './selectApp';
+export { selectStatus, selectError } from './selectApp';
