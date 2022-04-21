@@ -9,3 +9,5 @@ export { TaskStatuses } from './TaskStatuses';
 export { TaskPriorities } from './TaskPriorities';
 
 export { Filter } from './Filter';
+
+export { PATH_API } from './pathAPI';
