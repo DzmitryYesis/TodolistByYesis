@@ -20,6 +20,21 @@ export {
   addTaskAC,
 } from './tasksActions';
 
+export {
+  SET_TODOLISTS,
+  CHANGE_TODOLIST_ENTITY_STATUS,
+  CHANGE_TODOLIST_TITLE,
+  CHANGE_TODOLIST_FILTER,
+  REMOVE_TODOLIST,
+  ADD_TODOLIST,
+  changeTodolistEntityStatusAC,
+  changeTodolistTitleAC,
+  removeTodolistAC,
+  changeTodolistFilterAC,
+  setTodolistsAC,
+  addTodolistAC,
+} from './todolistsActions';
+
 export type {
   AllAppActionType,
   AppActionType,
