@@ -1,7 +1,7 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
 import {IconButton, TextField} from '@material-ui/core';
 import {AddBox} from '@material-ui/icons';
-import {RequestStatusType} from './../store/reducers/app-reducer';
+import {RequestStatusType} from 'store/reducers/app-reducer';
 
 type InputForAddType = {
     item: (newTitle: string) => void

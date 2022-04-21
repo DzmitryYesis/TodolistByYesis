@@ -13,7 +13,7 @@ import {
 import {addTaskTC, changeTaskTitleTC, removeTaskTC, updateTaskStatusTC} from './../../store/reducers/task-reducer';
 import {TaskStatuses, TodoTaskType} from './../../api/todolist-api';
 import {Grid, Paper} from '@material-ui/core';
-import InputForAdd from './../InputForAdd';
+import InputForAdd from 'components/InputForAdd/InputForAdd';
 import Todolists from './Todolist/Todolists';
 import {Navigate} from 'react-router-dom';
 

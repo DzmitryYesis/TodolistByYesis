@@ -15,13 +15,13 @@ import { CircularProgress } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
-import { ErrorSnackbar } from './components/ErrorSnackbar';
+import { ErrorSnackbar } from 'components/ErrorSnackbar/ErrorSnackbar';
 import { Login } from './components/Login/Login';
 import { TodolistsList } from './components/TodolistsList/TodolistsList';
-import { initializeAppTC, logoutTC } from './store/reducers/auth-reducer';
 
 import { PATH, RequestStatus } from 'enum';
 import { selectIsInitialized, selectIsLoggedIn, selectStatus } from 'store/selectors';
+import { initializeAppTC, logoutTC } from 'store/thunks';
 
 export const App = (): ReactElement => {
   const dispatch = useDispatch();

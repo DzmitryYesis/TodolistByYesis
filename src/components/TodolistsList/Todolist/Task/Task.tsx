@@ -3,7 +3,7 @@ import {Delete} from '@material-ui/icons';
 import {Checkbox, IconButton} from '@material-ui/core';
 import {TaskStatuses, TaskType} from './../../../../api/todolist-api';
 import {RequestStatusType} from './../../../../store/reducers/app-reducer';
-import SpanChangeTitle from './../../../SpanChangeTitle';
+import SpanChangeTitle from 'components/SnapChangeTitle/SpanChangeTitle';
 
 type TaskComponentType = {
     todolistId: string
