@@ -1,62 +1,68 @@
-import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
-import {IconButton, TextField} from '@material-ui/core';
-import {AddBox} from '@material-ui/icons';
-import {RequestStatusType} from 'store/reducers/app-reducer';
+import React, { ChangeEvent, KeyboardEvent, useState } from 'react';
 
-type InputForAddType = {
-    item: (newTitle: string) => void
-    entityStatus?: RequestStatusType
-}
+import { IconButton, TextField } from '@material-ui/core';
+import { AddBox } from '@material-ui/icons';
 
-const InputForAdd = React.memo(({item, entityStatus, ...props}: InputForAddType) => {
+import { RequestStatus } from 'enum';
+import { RequestStatusType } from 'types';
 
-    console.log('AddInput')
+type InputForAddPropsType = {
+  item: (newTitle: string) => void;
+  entityStatus: RequestStatusType;
+};
 
-    const [title, setTitle] = useState('')
-    const [error, setError] = useState<string | null>(null)
+const CHAR_CODE = 13;
 
-    const addTaskHandler = () => {
-        if (title.trim() !== '') {
-            item(title)
-            setTitle('')
-        } else {
-            setError('Incorrect title')
-        }
+export const InputForAdd = React.memo(({ item, entityStatus }: InputForAddPropsType) => {
+  const [title, setTitle] = useState('');
+  const [error, setError] = useState<string | null>(null);
+
+  const addTaskHandler = (): void => {
+    if (title.trim() !== '') {
+      item(title);
+      setTitle('');
+    } else {
+      setError('Incorrect title');
     }
-    const onChangeTitleHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        if (error !== null) {
-            setError(null)
-        }
-        setTitle(e.currentTarget.value)
-    }
-    const addTaskOnKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-        if (title.trim() !== '') {
-            if (e.charCode === 13) {
-                item(title)
-                setTitle('')
-            }
-        } else {
-            setError('Incorrect title')
-        }
-    }
+  };
 
-    return (
-        <div>
-            <TextField
-                variant="outlined"
-                error={!!error}
-                value={title}
-                onChange={onChangeTitleHandler}
-                onKeyPress={addTaskOnKeyPressHandler}
-                label={'Title'}
-                helperText={error}
-                disabled={entityStatus === 'loading'}
-            />
-            <IconButton color={'primary'} onClick={addTaskHandler} disabled={entityStatus === 'loading'}>
-                <AddBox/>
-            </IconButton>
-        </div>
-    );
+  const onChangeTitleHandler = (e: ChangeEvent<HTMLInputElement>): void => {
+    if (error !== null) {
+      setError(null);
+    }
+    setTitle(e.currentTarget.value);
+  };
+
+  const addTaskOnKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>): void => {
+    if (title.trim() !== '') {
+      if (e.charCode === CHAR_CODE) {
+        item(title);
+        setTitle('');
+      }
+    } else {
+      setError('Incorrect title');
+    }
+  };
+
+  return (
+    <div>
+      <TextField
+        variant="outlined"
+        error={!!error}
+        value={title}
+        onChange={onChangeTitleHandler}
+        onKeyPress={addTaskOnKeyPressHandler}
+        label="Title"
+        helperText={error}
+        disabled={entityStatus === RequestStatus.LOADING}
+      />
+      <IconButton
+        color="primary"
+        onClick={addTaskHandler}
+        disabled={entityStatus === RequestStatus.LOADING}
+      >
+        <AddBox />
+      </IconButton>
+    </div>
+  );
 });
-
-export default InputForAdd;

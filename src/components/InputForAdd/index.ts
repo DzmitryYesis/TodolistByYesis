@@ -1,0 +1,1 @@
+export { InputForAdd } from './InputForAdd';
