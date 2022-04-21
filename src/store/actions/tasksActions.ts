@@ -48,7 +48,7 @@ export const changeTaskTitleAC = (todolistId: string, taskId: string, newTitle: 
     },
   } as const);
 
-export const setTasksAC = (todolistId: string, tasks: Array<TaskType>) =>
+export const setTasksAC = (todolistId: string, tasks: TaskType[]) =>
   ({
     type: SET_TASKS,
     payload: {

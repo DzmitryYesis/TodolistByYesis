@@ -41,7 +41,7 @@ export const changeTodolistTitleAC = (todolistId: string, newTitle: string) =>
     },
   } as const);
 
-export const setTodolistsAC = (todolists: Array<TodolistType>) =>
+export const setTodolistsAC = (todolists: TodolistType[]) =>
   ({
     type: SET_TODOLISTS,
     payload: {
