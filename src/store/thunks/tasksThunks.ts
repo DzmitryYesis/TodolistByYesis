@@ -9,7 +9,7 @@ import {
   changeTaskTitleAC,
   removeTaskAC,
   setAppStatusAC,
-  setTaskAC,
+  setTasksAC,
 } from 'store/actions';
 import { TaskActionType } from 'store/reducers/task-reducer';
 import { changeTodolistEntityStatusAC } from 'store/reducers/todolists-reducer';
@@ -21,7 +21,7 @@ export const setTasksTC =
     todolistAPI
       .getTasks(todolistId)
       .then(res => {
-        dispatch(setTaskAC(todolistId, res.data.items));
+        dispatch(setTasksAC(todolistId, res.data.items));
         dispatch(setAppStatusAC(RequestStatus.SUCCEEDED));
       })
       .catch(error => {

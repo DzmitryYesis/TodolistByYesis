@@ -16,7 +16,7 @@ export {
   changeTaskTitleAC,
   changeTaskStatusAC,
   removeTaskAC,
-  setTaskAC,
+  setTasksAC,
   addTaskAC,
 } from './tasksActions';
 
