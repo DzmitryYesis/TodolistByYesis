@@ -1,6 +1,6 @@
 import React, {useCallback, useEffect} from 'react';
 import InputForAdd from 'components/InputForAdd/InputForAdd';
-import SpanChangeTitle from 'components/SnapChangeTitle/SpanChangeTitle';
+import SpanChangeTitle from 'components/SpanChangeTitle/SpanChangeTitle';
 import Task from './Task/Task';
 import {TaskStatuses, TaskType} from './../../../api/todolist-api';
 import {FilterType} from 'store/reducers/todolists-reducer';
