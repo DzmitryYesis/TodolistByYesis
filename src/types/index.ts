@@ -11,3 +11,5 @@ export type { FilterType } from './FilterType';
 export type { ErrorUtilsDispatchType } from './ErrorUtilsDispatchType';
 
 export type { LoginParamsType } from './LoginType';
+
+export type { FormikErrorType } from './FormikErrorType';
