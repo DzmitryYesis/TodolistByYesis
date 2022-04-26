@@ -15,10 +15,7 @@ import { CircularProgress } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
-import { Login } from './components/Login/Login';
-import { TodolistsList } from './components/TodolistsList/TodolistsList';
-
-import { ErrorSnackbar } from 'components';
+import { Login, TodolistsList, ErrorSnackbar } from 'components';
 import { PATH, RequestStatus } from 'enum';
 import { selectIsInitialized, selectIsLoggedIn, selectStatus } from 'store/selectors';
 import { initializeAppTC, logoutTC } from 'store/thunks';
