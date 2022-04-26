@@ -36,7 +36,7 @@ export const removeTaskTC =
     taskAPI
       .deleteTask(todolistId, taskId)
       .then(res => {
-        if (res.status === ResultCode.Success) {
+        if (res.data.resultCode === ResultCode.Success) {
           dispatch(removeTaskAC(todolistId, taskId));
           dispatch(setAppStatusAC(RequestStatus.SUCCEEDED));
         } else {

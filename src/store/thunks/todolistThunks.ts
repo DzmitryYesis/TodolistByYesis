@@ -32,7 +32,7 @@ export const removeTodolistTC =
     todolistAPI
       .deleteTodolist(todolistId)
       .then(res => {
-        if (res.status === ResultCode.Success) {
+        if (res.data.resultCode === ResultCode.Success) {
           dispatch(removeTodolistAC(todolistId));
           dispatch(setAppStatusAC(RequestStatus.SUCCEEDED));
         } else {
