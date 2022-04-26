@@ -1,6 +1,6 @@
 import { Dispatch } from 'redux';
 
-import { todolistAPI } from 'api';
+import { taskAPI } from 'api';
 import { RequestStatus, ResultCode, TaskStatuses } from 'enum';
 import { AppRootStateType } from 'store';
 import {
@@ -18,7 +18,7 @@ import { handleServerAppError, handleServerNetworkError } from 'utils';
 export const setTasksTC =
   (todolistId: string) => (dispatch: Dispatch<AllAppActionType>) => {
     dispatch(setAppStatusAC(RequestStatus.LOADING));
-    todolistAPI
+    taskAPI
       .getTasks(todolistId)
       .then(res => {
         dispatch(setTasksAC(todolistId, res.data.items));
@@ -33,7 +33,7 @@ export const removeTaskTC =
   (todolistId: string, taskId: string) => (dispatch: Dispatch<AllAppActionType>) => {
     dispatch(setAppStatusAC(RequestStatus.LOADING));
     dispatch(changeTodolistEntityStatusAC(todolistId, RequestStatus.LOADING));
-    todolistAPI
+    taskAPI
       .deleteTask(todolistId, taskId)
       .then(res => {
         if (res.status === ResultCode.Success) {
@@ -54,7 +54,7 @@ export const removeTaskTC =
 export const addTaskTC =
   (todolistId: string, title: string) => (dispatch: Dispatch<AllAppActionType>) => {
     dispatch(setAppStatusAC(RequestStatus.LOADING));
-    todolistAPI
+    taskAPI
       .createTask(todolistId, title)
       .then(res => {
         if (res.data.resultCode === ResultCode.Success) {
@@ -78,7 +78,7 @@ export const updateTaskStatusTC =
     const tasksFromCurrentTodolist = allTasks[todolistId];
     const task = tasksFromCurrentTodolist.find(t => t.id === taskId);
     if (task) {
-      todolistAPI
+      taskAPI
         .updateTask(todolistId, taskId, {
           title: task.title,
           status,
@@ -112,7 +112,7 @@ export const changeTaskTitleTC =
     const tasksFromCurrentTodolist = allTasks[todolistId];
     const task = tasksFromCurrentTodolist.find(t => t.id === taskId);
     if (task) {
-      todolistAPI
+      taskAPI
         .updateTask(todolistId, taskId, {
           title,
           status: task.status,
