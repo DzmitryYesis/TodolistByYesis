@@ -46,7 +46,13 @@ export const App = (): ReactElement => {
     <div className="App">
       <ErrorSnackbar />
       <AppBar position="static">
-        <Toolbar>
+        <Toolbar
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+          }}
+        >
           <IconButton edge="start" color="inherit" aria-label="menu">
             <Menu />
           </IconButton>
