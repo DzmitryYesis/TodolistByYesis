@@ -8,7 +8,6 @@ import {
   IconButton,
   LinearProgress,
   Toolbar,
-  Typography,
 } from '@material-ui/core';
 import { Menu } from '@material-ui/icons';
 import { CircularProgress } from '@mui/material';
@@ -51,7 +50,7 @@ export const App = (): ReactElement => {
           <IconButton edge="start" color="inherit" aria-label="menu">
             <Menu />
           </IconButton>
-          <Typography variant="h6">News</Typography>
+          {/* <Typography variant="h6">News</Typography> */}
           {isLoggedIn && (
             <Button color="inherit" onClick={logoutHandler}>
               Log Out
